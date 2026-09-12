@@ -1,0 +1,212 @@
+{
+  "blade": {
+    "id": "blade",
+    "name": "Blade",
+    "tagline": "the one who stands in the doorway",
+    "blurb": "You learned the trade holding a line that other people were running from. Heavy steel, heavy armour, and a stubbornness that reads as courage from a distance.",
+    "hitDie": 10,
+    "primary": "str",
+    "abilityBonus": { "str": 2, "con": 1 },
+    "saveProficiencies": ["str", "con"],
+    "armour": { "name": "Chain", "base": 16, "dexBonus": false, "dexMax": 0 },
+    "marks": 20,
+    "resource": null,
+    "kit": [
+      { "item": "longsword", "equip": "weapon" },
+      { "item": "shield", "equip": "offhand" },
+      { "item": "ration", "qty": 3 }
+    ],
+    "abilities": [
+      {
+        "id": "riposte",
+        "name": "Riposte",
+        "level": 1,
+        "type": "reaction",
+        "uses": "encounter",
+        "auto": true,
+        "text": "Once per encounter, when an enemy misses you, make an immediate attack against it."
+      },
+      {
+        "id": "second_wind",
+        "name": "Second Wind",
+        "level": 2,
+        "type": "bonus",
+        "uses": "rest",
+        "heal": "1d10",
+        "healScalesWithLevel": true,
+        "text": "Bonus action. Heal 1d10 + your level. Once per rest."
+      },
+      {
+        "id": "cleave",
+        "name": "Cleave",
+        "level": 3,
+        "type": "passive",
+        "auto": true,
+        "text": "When you reduce an enemy to 0 HP, immediately attack another enemy in the room."
+      }
+    ]
+  },
+
+  "stalker": {
+    "id": "stalker",
+    "name": "Stalker",
+    "tagline": "the one who was never there",
+    "blurb": "You hunt. You have always hunted. The difference between you and the thing you are hunting is that you decided which of you it was.",
+    "hitDie": 8,
+    "primary": "dex",
+    "abilityBonus": { "dex": 2, "wis": 1 },
+    "saveProficiencies": ["dex", "wis"],
+    "armour": { "name": "Studded Leather", "base": 12, "dexBonus": true, "dexMax": null },
+    "marks": 25,
+    "resource": null,
+    "kit": [
+      { "item": "shortbow", "equip": "weapon" },
+      { "item": "dagger", "qty": 2 },
+      { "item": "rope" },
+      { "item": "ration", "qty": 3 }
+    ],
+    "abilities": [
+      {
+        "id": "mark",
+        "name": "Mark",
+        "level": 1,
+        "type": "free",
+        "uses": "unlimited",
+        "targets": "enemy",
+        "text": "Free action. Mark one enemy — your attacks against it have advantage until it dies or you mark another. One mark at a time."
+      },
+      {
+        "id": "fade",
+        "name": "Fade",
+        "level": 2,
+        "type": "action",
+        "uses": "unlimited",
+        "dc": 13,
+        "checkAbility": "dex",
+        "text": "Action. DC 13 DEX check to vanish. While hidden your next attack deals +2d6. Attacking breaks it."
+      },
+      {
+        "id": "trapsense",
+        "name": "Trapsense",
+        "level": 3,
+        "type": "passive",
+        "auto": true,
+        "text": "You automatically detect hazards before they trigger. Searches for concealed dangers succeed without a roll."
+      }
+    ]
+  },
+
+  "emberwright": {
+    "id": "emberwright",
+    "name": "Emberwright",
+    "tagline": "the one who spends themself",
+    "blurb": "The fire is not a tool you picked up. It is a debt you are servicing, and every casting is a payment you cannot quite afford.",
+    "hitDie": 6,
+    "primary": "int",
+    "abilityBonus": { "int": 2, "con": 1 },
+    "saveProficiencies": ["int", "cha"],
+    "armour": { "name": "Warded Robes", "base": 13, "dexBonus": true, "dexMax": null },
+    "marks": 15,
+    "resource": { "id": "embers", "name": "Embers", "ability": "int" },
+    "kit": [
+      { "item": "focus_rod", "equip": "weapon" },
+      { "item": "dagger" },
+      { "item": "spellbook" },
+      { "item": "ration", "qty": 3 }
+    ],
+    "abilities": [
+      {
+        "id": "cinderbolt",
+        "name": "Cinderbolt",
+        "level": 1,
+        "type": "action",
+        "cost": 1,
+        "targets": "enemy",
+        "attack": true,
+        "range": "ranged",
+        "damage": "2d6",
+        "damageType": "fire",
+        "burn": "1d6",
+        "burnRounds": 2,
+        "text": "1 Ember. Ranged attack for 2d6 + INT fire. On a crit the target burns for 1d6 at the start of each of its next two turns."
+      },
+      {
+        "id": "emberwall",
+        "name": "Emberwall",
+        "level": 2,
+        "type": "action",
+        "cost": 2,
+        "targets": "self",
+        "acBonus": 2,
+        "text": "2 Embers. You and your allies gain +2 AC until your next turn."
+      },
+      {
+        "id": "detonate",
+        "name": "Detonate",
+        "level": 3,
+        "type": "action",
+        "cost": 3,
+        "targets": "all",
+        "damage": "3d6",
+        "damageType": "fire",
+        "saveAbility": "dex",
+        "saveForHalf": true,
+        "text": "3 Embers. 3d6 to every enemy in the room, DEX save for half. It hits your allies too."
+      }
+    ]
+  },
+
+  "lantern": {
+    "id": "lantern",
+    "name": "Lantern",
+    "tagline": "the one who decides who comes back",
+    "blurb": "Someone has to carry the light and someone has to decide where to point it. Both of those are the same terrible job and it is yours.",
+    "hitDie": 8,
+    "primary": "wis",
+    "abilityBonus": { "wis": 2, "cha": 1 },
+    "saveProficiencies": ["wis", "cha"],
+    "armour": { "name": "Scale", "base": 14, "dexBonus": true, "dexMax": 2 },
+    "marks": 20,
+    "resource": { "id": "oil", "name": "Oil", "ability": "wis" },
+    "kit": [
+      { "item": "warding_lantern", "equip": "weapon" },
+      { "item": "mace" },
+      { "item": "holy_sigil" },
+      { "item": "ration", "qty": 3 }
+    ],
+    "abilities": [
+      {
+        "id": "kindle",
+        "name": "Kindle",
+        "level": 1,
+        "type": "action",
+        "cost": 1,
+        "targets": "self",
+        "heal": "1d8",
+        "healAbility": "wis",
+        "text": "1 Oil. Action. Heal an ally or yourself for 1d8 + your WIS modifier."
+      },
+      {
+        "id": "warding_light",
+        "name": "Warding Light",
+        "level": 2,
+        "type": "action",
+        "cost": 1,
+        "targets": "self",
+        "grantsSaveAdvantage": true,
+        "text": "1 Oil. One ally gains advantage on their next saving throw."
+      },
+      {
+        "id": "last_breath",
+        "name": "Last Breath",
+        "level": 3,
+        "type": "reaction",
+        "cost": 3,
+        "targets": "ally",
+        "uses": "lifetime",
+        "selfForbidden": true,
+        "text": "3 Oil. When an ally would die, they drop to 1 HP instead. Never yourself. Once per character lifetime — not per rest. Lifetime."
+      }
+    ]
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "bloatrat": {
+    "id": "bloatrat",
+    "name": "Bloatrat",
+    "hp": 6,
+    "ac": 12,
+    "attackBonus": 3,
+    "damage": "1d4+1",
+    "initiative": 2,
+    "xp": 10,
+    "description": "Swollen to the size of a dog and slick with something that is not water. It moves in short, deliberate rushes.",
+    "onDeath": {
+      "kind": "burst",
+      "saveAbility": "con",
+      "dc": 11,
+      "damage": "1d4",
+      "text": "The Bloatrat bursts."
+    },
+    "fleeDc": 10
+  },
+  "bone_chorister": {
+    "id": "bone_chorister",
+    "name": "Bone Chorister",
+    "hp": 9,
+    "ac": 13,
+    "attackBonus": 2,
+    "damage": "1d6",
+    "initiative": 0,
+    "xp": 20,
+    "description": "A cage of wired ribs with a jaw still working. It is singing. They are all singing the same note.",
+    "trait": {
+      "kind": "choir",
+      "text": "+1 to hit for each other living Chorister."
+    },
+    "fleeDc": 11
+  },
+  "gate_wight": {
+    "id": "gate_wight",
+    "name": "Gate Wight",
+    "hp": 7,
+    "ac": 12,
+    "attackBonus": 3,
+    "damage": "1d4+1",
+    "initiative": 0,
+    "xp": 10,
+    "description": "Still in the livery of the house that posted it. It has held this doorway a great deal longer than you held yours.",
+    "fleeDc": 10
+  },
+  "warren_shrike": {
+    "id": "warren_shrike",
+    "name": "Warren Shrike",
+    "hp": 5,
+    "ac": 14,
+    "attackBonus": 4,
+    "damage": "1d4",
+    "initiative": 4,
+    "xp": 10,
+    "description": "Grey, quick, and entirely silent. It has been pacing you for two miles and it wanted you to know.",
+    "fleeDc": 15
+  },
+  "cinder_moth": {
+    "id": "cinder_moth",
+    "name": "Cinder Moth",
+    "hp": 6,
+    "ac": 11,
+    "attackBonus": 2,
+    "damage": "1d4",
+    "initiative": 3,
+    "xp": 10,
+    "description": "It is made of the part of a fire that gets away from you. It is drawn to the rod in your hand and it is not afraid of it.",
+    "fleeDc": 13
+  },
+  "grief_shade": {
+    "id": "grief_shade",
+    "name": "Grief Shade",
+    "hp": 7,
+    "ac": 12,
+    "attackBonus": 3,
+    "damage": "1d4+1",
+    "initiative": 1,
+    "xp": 10,
+    "description": "It has the shape of somebody waiting up for someone. It does not know that the waiting is over.",
+    "fleeDc": 12
+  },
+  "warren_stalker": {
+    "id": "warren_stalker",
+    "name": "Warren Stalker",
+    "hp": 22,
+    "ac": 15,
+    "attackBonus": 5,
+    "damage": "2d6",
+    "initiative": 4,
+    "xp": 30,
+    "description": "Long-limbed, grey, and patient. It has been in the room the whole time.",
+    "trait": {
+      "kind": "opportunist",
+      "text": "Attacks with advantage against whoever acted immediately before it."
+    },
+    "fleeDc": 16
+  },
+  "maugrim": {
+    "id": "maugrim",
+    "name": "Maugrim, the Tidewarden",
+    "boss": true,
+    "hp": 40,
+    "ac": 15,
+    "attackBonus": 5,
+    "damage": "2d6+3",
+    "initiative": 2,
+    "xp": 150,
+    "description": "It was a warden once, and the water has been correcting that for a long time. It stands in the throne's shadow with the patience of a tide.",
+    "phases": [
+      {
+        "index": 1,
+        "from": 40,
+        "to": 28,
+        "name": "The Warden Stirs",
+        "enterText": "Maugrim rises from the flooded dais. Behind you, the door grinds shut and stays shut.",
+        "undertowEvery": 3,
+        "undertow": {
+          "saveAbility": "str",
+          "dc": 13,
+          "text": "The water hauls backward all at once — Undertow!"
+        }
+      },
+      {
+        "index": 2,
+        "from": 27,
+        "to": 14,
+        "name": "The Water Rises",
+        "enterText": "Maugrim strikes the dais and the chamber floods to the chest. Steam gutters off its shoulders — the fire in here has stopped frightening it.",
+        "undertowEvery": 3,
+        "undertow": {
+          "saveAbility": "str",
+          "dc": 13,
+          "text": "The water hauls backward all at once — Undertow!"
+        },
+        "meleePenalty": -2,
+        "meleePenaltyNegatedBy": "plinth",
+        "resistances": [
+          "fire"
+        ]
+      },
+      {
+        "index": 3,
+        "from": 13,
+        "to": 0,
+        "name": "The Drowning Song",
+        "enterText": "Maugrim opens what is left of its throat and the water in your lungs answers it.",
+        "undertowEvery": 3,
+        "undertow": {
+          "saveAbility": "str",
+          "dc": 13,
+          "text": "The water hauls backward all at once — Undertow!"
+        },
+        "meleePenalty": -2,
+        "meleePenaltyNegatedBy": "plinth",
+        "resistances": [
+          "fire"
+        ],
+        "drowningSong": {
+          "damage": "1d6",
+          "saveAbility": "con",
+          "dc": 14,
+          "text": "The Drowning Song rolls over you."
+        }
+      }
+    ],
+    "lootTable": [
+      "drowned_crown",
+      "tidecleaver",
+      "warden_robe"
+    ],
+    "guaranteedDrop": "tidewarden_seal",
+    "fleeDc": 99,
+    "unlocksHub": true,
+    "victoryTitle": "— The Drowned Throne is quiet —",
+    "victoryText": "The water goes out of the room all at once, the way water does when whatever was holding it stops. Behind the throne the air splits on a seam that was not there, and holds open, and on the other side of it there is a street.",
+    "victoryHint": "The portal holds. MOVE PORTAL to step through — or MOVE DOWN, where the water stops and the Crypt begins."
+  },
+  "skeletal_husk": {
+    "id": "skeletal_husk",
+    "name": "Skeletal Husk",
+    "hp": 10,
+    "ac": 13,
+    "attackBonus": 4,
+    "damage": "1d6+1",
+    "initiative": 1,
+    "xp": 40,
+    "fleeDc": 11,
+    "description": "Wired together badly and moving anyway. It was somebody once and the Crypt has stopped caring about that."
+  },
+  "grave_wisp": {
+    "id": "grave_wisp",
+    "name": "Grave Wisp",
+    "hp": 6,
+    "ac": 14,
+    "attackBonus": 4,
+    "damage": "1d6",
+    "damageType": "necrotic",
+    "initiative": 4,
+    "xp": 30,
+    "fleeDc": 12,
+    "description": "A cold light about the size of a fist. It drifts, and it is very hard to hit something that has decided not to be anywhere in particular."
+  },
+  "the_wight": {
+    "id": "the_wight",
+    "name": "The Wight",
+    "hp": 32,
+    "ac": 14,
+    "attackBonus": 6,
+    "damage": "1d10",
+    "initiative": 2,
+    "xp": 90,
+    "fleeDc": 16,
+    "elite": true,
+    "lifesteal": 0.5,
+    "description": "Tall, dry, and unhurried. It has been alone in here long enough to have made peace with it, and it would like you to stay.",
+    "trait": {
+      "kind": "lifesteal",
+      "text": "Heals itself for half the damage it deals."
+    }
+  },
+  "withered_warden": {
+    "id": "withered_warden",
+    "name": "The Withered Warden",
+    "boss": true,
+    "hp": 56,
+    "ac": 15,
+    "attackBonus": 7,
+    "damage": "2d6+3",
+    "initiative": 1,
+    "xp": 450,
+    "fleeDc": 99,
+    "description": "It kept this place when the place still had a name. The keeping went on a great deal longer than the name did.",
+    "phases": [
+      {
+        "index": 1,
+        "from": 56,
+        "to": 29,
+        "name": "The Keeping",
+        "enterText": "The Warden straightens off the wall it has been leaning on for two hundred years. Behind you, the passage you came through is already gone."
+      },
+      {
+        "index": 2,
+        "from": 28,
+        "to": 0,
+        "name": "Devour",
+        "enterText": "Something in it gives way, and what is left is hungry. It stops guarding the room and starts feeding in it.",
+        "attackBonus": 7,
+        "damage": "1d10",
+        "lifesteal": 0.5,
+        "attackName": "Devour"
+      }
+    ],
+    "lootTable": [
+      "warden_crown",
+      "husk-iron_blade",
+      "sanctum_shroud"
+    ],
+    "guaranteedDrop": "wardens_key",
+    "unlocksHub": false,
+    "victoryTitle": "— The Sanctum is unkept —",
+    "victoryText": "It goes down in the middle of the room it has been sweeping for two hundred years, and does not fall untidily, because it would not. The dust it raises settles wrong — outward, and slowly, as though the room has stopped being held to a standard.\n\nNothing opens. Nothing announces itself. The way you came is still sealed and the only road out is back up the stair, past everything you already killed.",
+    "victoryHint": "Nothing down here leads anywhere new. MOVE UP, and take it with you."
+  }
+}

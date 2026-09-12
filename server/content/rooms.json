@@ -1,0 +1,621 @@
+{
+  "_comment": "Prologues belong to backgrounds (GAME_DESIGN §5.1). Each is two rooms — a story beat and an encounter — and every one of them empties into the shared Descent, then the First Camp. Direction is always DOWN in a prologue, so the first verb a player learns never changes on them.",
+  "pro_gravedigger_1": {
+    "id": "pro_gravedigger_1",
+    "zone": "prologue",
+    "zoneName": "The Ninth Night",
+    "prologueFor": "gravedigger",
+    "prologueStart": true,
+    "name": "The Open Plot",
+    "description": "You dug this one yesterday and it is empty this morning, and the sides are scored from the inside. Twelve years in this trade and you have never once seen that. Whatever climbed out went east, toward the old cut, and it did not go quickly. It had time.",
+    "exits": {
+      "down": "pro_gravedigger_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_gravedigger_2": {
+    "id": "pro_gravedigger_2",
+    "zone": "prologue",
+    "zoneName": "The Ninth Night",
+    "prologueFor": "gravedigger",
+    "name": "The Old Cut",
+    "description": "A trench of collapsed graves, the ground gone soft and the markers leaning into each other like drunks. Something here has the shape of a person sitting up for somebody. It has been doing it a very long time and nobody ever came.",
+    "exits": {
+      "up": "pro_gravedigger_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "grief_shade"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_caravan_guard_1": {
+    "id": "pro_caravan_guard_1",
+    "zone": "prologue",
+    "zoneName": "The Held Door",
+    "prologueFor": "caravan_guard",
+    "prologueStart": true,
+    "name": "The Doorway",
+    "description": "You are still standing in it. That is the whole of what you did — you held a doorway from the third bell until the ninth, and the people behind you got out, and the people in front of you did not get in.\n\nNobody has come to relieve you. Nobody is going to. The road east is ash, and the stair down is the only thing left that goes anywhere.",
+    "exits": {
+      "down": "pro_caravan_guard_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_caravan_guard_2": {
+    "id": "pro_caravan_guard_2",
+    "zone": "prologue",
+    "zoneName": "The Held Door",
+    "prologueFor": "caravan_guard",
+    "name": "The Undercroft Gate",
+    "description": "The house's own gate, and its own gatekeeper, still at the post. You know the livery. You wore a version of it for eleven years. It turns its head toward you with the exact professional courtesy you would have shown a stranger.",
+    "exits": {
+      "up": "pro_caravan_guard_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "gate_wight"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_scholar_1": {
+    "id": "pro_scholar_1",
+    "zone": "prologue",
+    "zoneName": "The Debt",
+    "prologueFor": "scholar",
+    "prologueStart": true,
+    "name": "The Burned Room",
+    "description": "This was a workshop and it was yours. The fire did what fire does when the person holding it is tired and certain. Everything is a fine even grey at exactly the height of the bench, and above that line there was nothing left to burn.\n\nThe committee will convene without you. That is, on balance, the smaller of this morning's problems.",
+    "exits": {
+      "down": "pro_scholar_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_scholar_2": {
+    "id": "pro_scholar_2",
+    "zone": "prologue",
+    "zoneName": "The Debt",
+    "prologueFor": "scholar",
+    "name": "The Ember Gutter",
+    "description": "The cellar stair, and the part of your fire that got out through the floor and has been living down here since. It knows you. That is the difficulty. It comes toward you like a dog that has been badly treated and has decided the treatment was owed.",
+    "exits": {
+      "up": "pro_scholar_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "cinder_moth"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_gutter_rat_1": {
+    "id": "pro_gutter_rat_1",
+    "zone": "prologue",
+    "zoneName": "The Bad Job",
+    "prologueFor": "gutter_rat",
+    "prologueStart": true,
+    "name": "The Wrong House",
+    "description": "The lock was easy, which should have been the warning. The house is empty of people and extremely full of everything else, and none of it has been touched in years, and the dust on the floor has one set of prints in it that is not yours.\n\nThe front door has closed. You did not close it.",
+    "exits": {
+      "down": "pro_gutter_rat_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_gutter_rat_2": {
+    "id": "pro_gutter_rat_2",
+    "zone": "prologue",
+    "zoneName": "The Bad Job",
+    "prologueFor": "gutter_rat",
+    "name": "The Coal Chute",
+    "description": "Down, because down was the only way that was not the front door. The chute lets out into a brick throat under the street, and something grey and quick is already in it with you. It has been waiting in this house longer than the dust has.",
+    "exits": {
+      "up": "pro_gutter_rat_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "warren_shrike"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_ferryman_1": {
+    "id": "pro_ferryman_1",
+    "zone": "prologue",
+    "zoneName": "The Last Crossing",
+    "prologueFor": "ferryman",
+    "prologueStart": true,
+    "name": "The Slack Water",
+    "description": "The tide has not turned. It was due at the fourth bell and it is well past the sixth, and the river is sitting there flat and patient like something holding its breath.\n\nYour last fare is still aboard, sitting exactly where they sat, and they have not asked to be put ashore.",
+    "exits": {
+      "down": "pro_ferryman_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_ferryman_2": {
+    "id": "pro_ferryman_2",
+    "zone": "prologue",
+    "zoneName": "The Last Crossing",
+    "prologueFor": "ferryman",
+    "name": "The Far Landing",
+    "description": "A landing you have poled past ten thousand times and never once tied up at. The steps go down into the water and keep going. Your fare stands at the top of them, waiting, the way they have apparently been waiting for a while.",
+    "exits": {
+      "up": "pro_ferryman_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "grief_shade"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_debt_collector_1": {
+    "id": "pro_debt_collector_1",
+    "zone": "prologue",
+    "zoneName": "The Column",
+    "prologueFor": "debt_collector",
+    "prologueStart": true,
+    "name": "The Short Column",
+    "description": "Your ledger is out on the table and one of the columns does not add, and you have checked it four times. The shortfall is not money. It is a name that is in the book twice and, as far as anyone in this city can tell you, was never alive once.\n\nThe address it gives is under the old cut.",
+    "exits": {
+      "down": "pro_debt_collector_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_debt_collector_2": {
+    "id": "pro_debt_collector_2",
+    "zone": "prologue",
+    "zoneName": "The Column",
+    "prologueFor": "debt_collector",
+    "name": "The Address",
+    "description": "There is a door down here and it has the right number on it, in the right hand, in your own house's ink. What is standing behind it is in livery you half recognise, and it turns toward you with the patience of something that has been expecting a collector for a very long time.",
+    "exits": {
+      "up": "pro_debt_collector_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "gate_wight"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_mine_child_1": {
+    "id": "pro_mine_child_1",
+    "zone": "prologue",
+    "zoneName": "Below the Cut",
+    "prologueFor": "mine_child",
+    "prologueStart": true,
+    "name": "The Stopped Face",
+    "description": "The seam ran out on the eleventh gallery and behind it there is worked stone, which is impossible, because nobody has ever cut this deep and lived to be paid for it.\n\nThe shift went home. You did not. You have been standing here with a pit lamp and a growing certainty since the whistle.",
+    "exits": {
+      "down": "pro_mine_child_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_mine_child_2": {
+    "id": "pro_mine_child_2",
+    "zone": "prologue",
+    "zoneName": "Below the Cut",
+    "prologueFor": "mine_child",
+    "name": "The Twelfth Gallery",
+    "description": "Through the face, and the gallery on the other side was not cut by your company. The props are wrong, the tool marks are wrong, and something grey and unhurried is coming along the rail toward your lamp, because your lamp is the only new thing down here in a very long time.",
+    "exits": {
+      "up": "pro_mine_child_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "warren_shrike"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_apostate_1": {
+    "id": "pro_apostate_1",
+    "zone": "prologue",
+    "zoneName": "The Renunciation",
+    "prologueFor": "apostate",
+    "prologueStart": true,
+    "name": "The Chapter House",
+    "description": "You said it out loud, in front of all of them, and then you put the sigil on the flags and walked. The remarkable thing was how little happened. No thunder, no hand on your shoulder. Just forty people not looking at you.\n\nThe only door they left unbarred goes down.",
+    "exits": {
+      "down": "pro_apostate_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_apostate_2": {
+    "id": "pro_apostate_2",
+    "zone": "prologue",
+    "zoneName": "The Renunciation",
+    "prologueFor": "apostate",
+    "name": "The Unquiet Aisle",
+    "description": "The undercroft of your own chapter house, which should be empty and is not. Something down here still keeps the vigil you walked out of. The part of you trained to be gentle about this is currently losing to the part of you that is afraid.",
+    "exits": {
+      "up": "pro_apostate_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "grief_shade"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_fenwitch_1": {
+    "id": "pro_fenwitch_1",
+    "zone": "prologue",
+    "zoneName": "The Drained Fen",
+    "prologueFor": "fenwitch",
+    "prologueStart": true,
+    "name": "The Dry Marsh",
+    "description": "Somebody has taken the water out of the fen. Forty years of it, gone in a night, and the reeds are standing up in cracked mud like hair on a corpse.\n\nUnder where the water was, there are steps. They are cut, and they are old, and every one of them goes the wrong way — down, toward whatever drank.",
+    "exits": {
+      "down": "pro_fenwitch_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_fenwitch_2": {
+    "id": "pro_fenwitch_2",
+    "zone": "prologue",
+    "zoneName": "The Drained Fen",
+    "prologueFor": "fenwitch",
+    "name": "The Sump",
+    "description": "The bottom of the steps, and the last of the fen is down here in a black pool going nowhere. Something is burning above it that has no business burning in this much damp, and it turns toward you with what you would call interest if it had a face to put it on.",
+    "exits": {
+      "up": "pro_fenwitch_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "cinder_moth"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "pro_deserter_1": {
+    "id": "pro_deserter_1",
+    "zone": "prologue",
+    "zoneName": "The Standard in the Mud",
+    "prologueFor": "deserter",
+    "prologueStart": true,
+    "name": "The Field After",
+    "description": "You came back to look at it, which everyone says you should not do. The standard is still where you put it down, and the mud has come halfway up it, and nobody picked it up after you left — which is either an accusation or a mercy and you have not decided.\n\nThere is a sap-trench at the field's edge that the engineers never finished. It goes further than it should.",
+    "exits": {
+      "down": "pro_deserter_2"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "LOOK studies a place. MOVE DOWN takes you on. Nothing from here down is a safe zone — not even this."
+  },
+  "pro_deserter_2": {
+    "id": "pro_deserter_2",
+    "zone": "prologue",
+    "zoneName": "The Standard in the Mud",
+    "prologueFor": "deserter",
+    "name": "The Unfinished Sap",
+    "description": "Twenty feet down and the trench stops being a trench and starts being a corridor, which is not something engineers do. There is a sentry on it in colours you know, standing the post you walked away from, and it has not been relieved either.",
+    "exits": {
+      "up": "pro_deserter_1",
+      "down": "the_descent"
+    },
+    "enemies": [
+      "gate_wight"
+    ],
+    "search": null,
+    "hint": "ATTACK strikes at an enemy. SHEET shows your character. Death here is as permanent as death anywhere."
+  },
+  "the_descent": {
+    "id": "the_descent",
+    "zone": "prologue",
+    "zoneName": "The Descent",
+    "name": "The Long Descent",
+    "description": "Whatever you came down, it ends here, and what it ends in is older and wetter and was plainly not built by anybody's grandfather. The stair goes on regardless.\n\nFar below there is firelight on stone and the sound of people who are not fighting. Somebody is arguing about the price of rope.",
+    "exits": {
+      "down": "first_camp"
+    },
+    "enemies": [],
+    "search": {
+      "auto": true,
+      "items": [
+        "ration",
+        "ration"
+      ],
+      "text": "A pack left on the step by somebody who meant to come back up for it."
+    },
+    "hint": "SEARCH turns over a room properly. INVENTORY lists what you carry. USE <item> spends it."
+  },
+  "first_camp": {
+    "id": "first_camp",
+    "zone": "camp",
+    "zoneName": "The First Camp",
+    "name": "The First Camp",
+    "camp": true,
+    "shrine": true,
+    "safe": true,
+    "description": "Forty people and one fire, in a hollow under the roots of everything. A woman with a longsword across her knees is asleep sitting up. Two bows are arguing about a map that neither of them is holding. Somebody with a staff has been asked, politely and then less politely, to keep it outside. A lantern is doing the rounds with a pot of something hot, and does not ask your name — down here nobody gives it until they have come back once.\n\nThis is as far as your own story goes. Through the mouth in the north wall it is the same story for all of you.",
+    "exits": {
+      "north": "warren_threshold"
+    },
+    "enemies": [],
+    "search": null,
+    "hint": "REST here before you go down. The camp fire is free, and it is the last free thing. NORTH is the Sunken Warrens."
+  },
+  "warren_threshold": {
+    "id": "warren_threshold",
+    "zone": "warrens",
+    "zoneName": "The Sunken Warrens",
+    "name": "The Threshold",
+    "description": "A drowned hall with the water at your shins and the ceiling low enough to feel personal. Every surface is furred with the same pale growth. Ahead, north, the floor drops and the water deepens. Something glints at the base of the near wall.",
+    "exits": {
+      "south": "first_camp",
+      "north": "cistern"
+    },
+    "enemies": [],
+    "search": {
+      "auto": true,
+      "items": [
+        "health_draught"
+      ],
+      "text": "A dead man's satchel, mostly rot. The stopper on the flask inside has held."
+    },
+    "hint": null
+  },
+  "cistern": {
+    "id": "cistern",
+    "zone": "warrens",
+    "zoneName": "The Sunken Warrens",
+    "name": "The Cistern",
+    "description": "A round chamber, waist-deep, with the water turning slowly on its own. Two shapes are already moving toward you along the rim, and they are not in a hurry, which is worse.",
+    "exits": {
+      "south": "warren_threshold",
+      "east": "fungal_gallery",
+      "north": "ossuary"
+    },
+    "enemies": [
+      "bloatrat",
+      "bloatrat"
+    ],
+    "fleeDcBonus": 2,
+    "fleeDcReason": "the water drags at every step",
+    "search": null,
+    "hint": "FLEE is a DEX check, and the water here makes it harder."
+  },
+  "fungal_gallery": {
+    "id": "fungal_gallery",
+    "zone": "warrens",
+    "zoneName": "The Sunken Warrens",
+    "name": "The Fungal Gallery",
+    "optional": true,
+    "description": "A long dry side-gallery, warm as a mouth, its walls shelved with caps the size of dinner plates. Some of them are sporecaps — worth more than everything you own. Most of them are not sporecaps, and telling the difference is the whole problem.",
+    "exits": {
+      "west": "cistern"
+    },
+    "enemies": [],
+    "search": {
+      "challenge": true,
+      "skill": "perception",
+      "dc": 12,
+      "onSuccess": {
+        "items": [
+          "sporecap_charm"
+        ],
+        "text": "You pick the one cap in forty that is the real thing, cut it free, and back out without touching anything else."
+      },
+      "onFailure": {
+        "damage": "2d6",
+        "damageType": "poison",
+        "text": "The cap you chose splits and breathes on you. The gallery empties its lungs."
+      },
+      "promptText": "The caps shelve away into the dark. Sorting them is going to take a careful eye and a steady hand."
+    },
+    "hint": "SEARCH here is a real gamble. There is no shame in walking back WEST."
+  },
+  "ossuary": {
+    "id": "ossuary",
+    "zone": "warrens",
+    "zoneName": "The Sunken Warrens",
+    "name": "The Ossuary",
+    "description": "Bones to the ceiling, sorted by kind, stacked with real care by somebody who had the time. Three of the stacks are standing up. All three are singing the same note and the note is getting louder.",
+    "exits": {
+      "south": "cistern",
+      "north": "wardroom"
+    },
+    "enemies": [
+      "bone_chorister",
+      "bone_chorister",
+      "bone_chorister"
+    ],
+    "search": null,
+    "hint": "They strengthen each other. Thinning the choir weakens what is left of it."
+  },
+  "wardroom": {
+    "id": "wardroom",
+    "zone": "warrens",
+    "zoneName": "The Sunken Warrens",
+    "name": "The Wardroom",
+    "shrine": true,
+    "description": "Dry, above the waterline, and quiet. A shrine-stone stands in the corner with a lantern-mark cut into it, still faintly warm to the hand. A merchant is slumped against the far wall with his pack still on. He got this far. He did not get further.",
+    "exits": {
+      "south": "ossuary",
+      "north": "drowned_throne"
+    },
+    "enemies": [],
+    "search": {
+      "auto": true,
+      "marks": "2d20+38",
+      "text": "The merchant's purse is untouched. Nothing down here has any use for coin."
+    },
+    "hint": "REST at the shrine restores everything — once. The stone goes cold after. North is the only way on, and it does not lead back."
+  },
+  "drowned_throne": {
+    "id": "drowned_throne",
+    "zone": "warrens",
+    "zoneName": "The Sunken Warrens",
+    "name": "The Drowned Throne",
+    "boss": true,
+    "noFlee": true,
+    "plinth": true,
+    "description": "A flooded rotunda around a black stone seat, and a raised plinth at its centre standing clear of the water. The door behind you will not open again until this is finished one way or the other. You were told that on the way in.",
+    "exits": {},
+    "exitsOnVictory": {
+      "portal": "ashvault_gate",
+      "down": "crypt_entrance"
+    },
+    "enemies": [
+      "maugrim"
+    ],
+    "search": null,
+    "hint": "There is no fleeing this room. CLIMB puts you on the plinth when the water rises."
+  },
+  "ashvault_gate": {
+    "id": "ashvault_gate",
+    "zone": "ashvault",
+    "zoneName": "Ashvault",
+    "name": "The Gate of Ashvault",
+    "safe": true,
+    "terminal": true,
+    "description": "You step through and the water noise stops as though a door had closed on it, because one has. Ashvault stands in the drained upper levels on the other side — loud, lit, and full of people who have all done exactly what you just did and are not going to be impressed by it.\n\nA gate-warden glances at the seal in your hand, then at your face, and writes something in a ledger without being asked.",
+    "exits": {},
+    "enemies": [],
+    "search": null,
+    "hint": null
+  },
+  "crypt_entrance": {
+    "id": "crypt_entrance",
+    "zone": "crypt",
+    "zoneName": "The Hollow Crypt",
+    "name": "The Crypt Entrance",
+    "description": "Below the Drowned Throne the water stops, all at once, as though it has been told to. The stair goes on dry into a hall of shelved dead laid in courses like brickwork, and the air is so still it feels handled.\n\nNothing down here is flooded. That is somehow worse.",
+    "exits": {
+      "up": "drowned_throne",
+      "down": "bone_antechamber"
+    },
+    "enemies": [],
+    "search": {
+      "auto": true,
+      "items": [
+        "marrow_draught"
+      ],
+      "text": "Set in a niche at eye height, where somebody meant it to be found: a stoppered flask, and a cup beside it for two."
+    },
+    "hint": "You are past the boss that gates Ashvault. Everything from here is optional, and it is harder than anything behind you."
+  },
+  "bone_antechamber": {
+    "id": "bone_antechamber",
+    "zone": "crypt",
+    "zoneName": "The Hollow Crypt",
+    "name": "The Bone Antechamber",
+    "description": "A low room where the courses have come apart and been restacked by something without hands. Two of the stacks are upright and have been waiting with the patience of furniture.\n\nBeyond them the hall forks: west into a collapsed passage, east to a doorway with light coming out of it that is not lamplight.",
+    "exits": {
+      "up": "crypt_entrance",
+      "west": "collapsed_passage",
+      "east": "rift_room"
+    },
+    "enemies": [
+      "skeletal_husk",
+      "skeletal_husk"
+    ],
+    "search": null,
+    "hint": "Two ways on, and you only get one. WEST is the long way. EAST is whatever that light is."
+  },
+  "collapsed_passage": {
+    "id": "collapsed_passage",
+    "zone": "crypt",
+    "zoneName": "The Hollow Crypt",
+    "name": "The Collapsed Passage",
+    "description": "The ceiling came down here a long time ago and the Crypt simply carried on underneath it. You go through most of it bent double. Three cold lights are waiting at the far end at about the height of a held lamp, and none of them is a lamp.",
+    "exits": {
+      "east": "bone_antechamber",
+      "down": "sanctum_antechamber"
+    },
+    "enemies": [
+      "grave_wisp",
+      "grave_wisp",
+      "grave_wisp"
+    ],
+    "search": {
+      "auto": true,
+      "items": [
+        "wisp_lantern"
+      ],
+      "text": "One of the lights has gone into an upturned jar and cannot work out how to leave. You screw the lid down."
+    },
+    "hint": "Hard to hit, and they do not hit back for much. This is a patience fight."
+  },
+  "rift_room": {
+    "id": "rift_room",
+    "zone": "crypt",
+    "zoneName": "The Hollow Crypt",
+    "name": "The Rift Room",
+    "description": "The light is coming from a tear in the air about the size of a door, and the edges of it are moving the way a cut moves. There is no mechanism, no seal, nothing to disarm. It has been open for a while and it is not interested in being looked at.",
+    "exits": {},
+    "enemies": [],
+    "search": null,
+    "pullsTo": "bleeding_hollow",
+    "pullText": "The tear takes hold of you before you have finished the thought. There is no crossing, no falling — one moment the Antechamber, and the next somewhere that smells of hot iron.",
+    "hint": null
+  },
+  "bleeding_hollow": {
+    "id": "bleeding_hollow",
+    "zone": "crypt",
+    "zoneName": "The Hollow Crypt",
+    "name": "The Bleeding Hollow",
+    "description": "A round chamber with walls that are warm to the touch and weeping something that is almost certainly not water. The tear is behind you and it does not go back the way it came.\n\nThere is one thing in here with you. It has been alone a long time and it stands as though it has been expecting company for most of it.",
+    "exits": {
+      "down": "sanctum_antechamber"
+    },
+    "enemies": [
+      "the_wight"
+    ],
+    "search": null,
+    "hint": "The Rift does not open backward. Down is the only way, and it goes to the same place the long way does."
+  },
+  "sanctum_antechamber": {
+    "id": "sanctum_antechamber",
+    "zone": "crypt",
+    "zoneName": "The Hollow Crypt",
+    "name": "The Sanctum Antechamber",
+    "description": "Both roads end in the same small square room, which is the first honest thing this place has done. There is a door ahead of it, shut, and a mark cut into the door that you last saw on the Tidewarden.\n\nBehind you the passage settles, without hurry, and seals.",
+    "exits": {
+      "north": "wardens_sanctum"
+    },
+    "enemies": [],
+    "search": null,
+    "shrine": true,
+    "hint": "A shrine, and the last one. REST here. There is no way back and only one way on."
+  },
+  "wardens_sanctum": {
+    "id": "wardens_sanctum",
+    "zone": "crypt",
+    "zoneName": "The Hollow Crypt",
+    "name": "The Warden's Sanctum",
+    "boss": true,
+    "noFlee": true,
+    "description": "A long vaulted room kept very clean. Everything in it has been maintained — the floor swept, the niches squared, the dead laid straight — by something that has had nothing else to do for two centuries and has not once considered stopping.",
+    "exits": {},
+    "exitsOnVictory": {
+      "up": "crypt_entrance"
+    },
+    "enemies": [
+      "withered_warden"
+    ],
+    "search": null,
+    "hint": "No fleeing. It kept this room before you were born and it intends to keep it after."
+  }
+}

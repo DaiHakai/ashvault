@@ -1,0 +1,368 @@
+{
+  "longsword": {
+    "id": "longsword",
+    "name": "Longsword",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d8",
+    "ability": "str",
+    "range": "melee",
+    "value": 15,
+    "description": "Good steel, badly maintained, still sharp where it counts."
+  },
+  "shortbow": {
+    "id": "shortbow",
+    "name": "Shortbow",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d6",
+    "ability": "dex",
+    "range": "ranged",
+    "value": 15,
+    "description": "Horn and sinew. The draw is light and the string is older than you are."
+  },
+  "dagger": {
+    "id": "dagger",
+    "name": "Dagger",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d4",
+    "ability": "dex",
+    "range": "melee",
+    "value": 4,
+    "description": "Everyone in the Warrens owns one. Almost nobody uses it for fighting."
+  },
+  "mace": {
+    "id": "mace",
+    "name": "Mace",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d6",
+    "ability": "str",
+    "range": "melee",
+    "value": 10,
+    "description": "A weight on a stick. Honest about what it is for."
+  },
+  "iron_spade": {
+    "id": "iron_spade",
+    "name": "Iron Spade",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d6",
+    "ability": "str",
+    "range": "melee",
+    "value": 3,
+    "description": "Worn to a bevel at one corner from a decade of frozen ground."
+  },
+  "warhammer": {
+    "id": "warhammer",
+    "name": "Warhammer",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d10",
+    "ability": "str",
+    "range": "melee",
+    "value": 22,
+    "description": "A weight on a haft. It does not need to be sharp and it knows it."
+  },
+  "spear": {
+    "id": "spear",
+    "name": "Spear",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d8",
+    "ability": "str",
+    "range": "melee",
+    "value": 12,
+    "description": "Ash shaft, leaf head. The oldest answer to the oldest problem."
+  },
+  "bound_tome": {
+    "id": "bound_tome",
+    "name": "Bound Tome",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d6",
+    "ability": "int",
+    "range": "ranged",
+    "value": 30,
+    "description": "Somebody wrote all of this down. You went and read it."
+  },
+  "chain_censer": {
+    "id": "chain_censer",
+    "name": "Chain Censer",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d6",
+    "ability": "wis",
+    "range": "melee",
+    "value": 18,
+    "description": "Smoke on a chain, swung to keep something at a distance. Nobody has fully explained what."
+  },
+  "shield": {
+    "id": "shield",
+    "name": "Shield",
+    "rarity": "common",
+    "slot": "offhand",
+    "ac": 2,
+    "value": 12,
+    "description": "Banded oak. The boss is dented inward in the shape of something's tooth."
+  },
+  "focus_rod": {
+    "id": "focus_rod",
+    "name": "Focus Rod",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d8",
+    "ability": "int",
+    "range": "ranged",
+    "value": 20,
+    "description": "Blackened at one end. It is always slightly warmer than the room."
+  },
+  "warding_lantern": {
+    "id": "warding_lantern",
+    "name": "Warding Lantern",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d8",
+    "ability": "wis",
+    "range": "melee",
+    "value": 20,
+    "description": "The flame inside leans toward whatever is about to happen, and it leans hard."
+  },
+  "sporecap_charm": {
+    "id": "sporecap_charm",
+    "name": "Sporecap Charm",
+    "rarity": "uncommon",
+    "slot": "trinket",
+    "ac": 1,
+    "value": 90,
+    "description": "A dried cap on a wire loop. It twitches when something wet moves nearby."
+  },
+  "tidewarden_seal": {
+    "id": "tidewarden_seal",
+    "name": "Tidewarden's Seal",
+    "rarity": "rare",
+    "slot": "trinket",
+    "ac": 1,
+    "keyItem": true,
+    "value": 0,
+    "description": "Maugrim's collar-plate, still warm. The gate-wardens of Ashvault will know it on sight."
+  },
+  "drowned_crown": {
+    "id": "drowned_crown",
+    "name": "Drowned Crown",
+    "rarity": "rare",
+    "slot": "trinket",
+    "saveBonus": 1,
+    "value": 300,
+    "description": "Coral has grown through the band and set it to a head that is no longer there."
+  },
+  "warden_robe": {
+    "id": "warden_robe",
+    "name": "Warden's Robe",
+    "rarity": "rare",
+    "slot": "trinket",
+    "ac": 2,
+    "value": 320,
+    "description": "Sodden and heavy, and yet it dries the moment you stop looking at it."
+  },
+  "tidecleaver": {
+    "id": "tidecleaver",
+    "name": "Tidecleaver",
+    "rarity": "rare",
+    "slot": "weapon",
+    "damage": "1d10",
+    "ability": "str",
+    "range": "melee",
+    "value": 350,
+    "description": "The edge is wet. It has been out of the water for an hour and the edge is wet."
+  },
+  "ration": {
+    "id": "ration",
+    "name": "Ration",
+    "rarity": "common",
+    "consumable": true,
+    "heal": "1d6",
+    "combatUse": false,
+    "value": 2,
+    "description": "Hard bread, harder cheese. Only any use when nothing is trying to kill you."
+  },
+  "health_draught": {
+    "id": "health_draught",
+    "name": "Health Draught",
+    "rarity": "common",
+    "consumable": true,
+    "heal": "2d4+2",
+    "combatUse": true,
+    "value": 40,
+    "description": "Tastes of iron filings and regret. Works, though."
+  },
+  "sporecap_elixir": {
+    "id": "sporecap_elixir",
+    "name": "Sporecap Elixir",
+    "rarity": "uncommon",
+    "consumable": true,
+    "heal": "4d4+4",
+    "combatUse": true,
+    "value": 110,
+    "description": "Thick, green, and faintly warm in the throat going down."
+  },
+  "spellbook": {
+    "id": "spellbook",
+    "name": "Spellbook",
+    "rarity": "common",
+    "value": 25,
+    "description": "Your own handwriting, getting worse toward the back."
+  },
+  "rope": {
+    "id": "rope",
+    "name": "Rope (30ft)",
+    "rarity": "common",
+    "value": 5,
+    "description": "Hemp, waxed. Thirty feet is never quite enough and always too heavy."
+  },
+  "holy_sigil": {
+    "id": "holy_sigil",
+    "name": "Holy Sigil",
+    "rarity": "common",
+    "value": 10,
+    "description": "A lantern struck in tin. Cheap. Everyone here has one."
+  },
+  "signal_horn": {
+    "id": "signal_horn",
+    "name": "Signal Horn",
+    "rarity": "common",
+    "value": 18,
+    "usePerDungeon": "reroll_initiative",
+    "description": "One long note carries two miles. Down here it carries rather less."
+  },
+  "waterlogged_journal": {
+    "id": "waterlogged_journal",
+    "name": "Waterlogged Journal",
+    "rarity": "common",
+    "value": 6,
+    "usePerDungeon": "identify",
+    "description": "Half the pages have fused. The half that survived is the half you needed."
+  },
+  "bent_lockpicks": {
+    "id": "bent_lockpicks",
+    "name": "Bent Lockpicks",
+    "rarity": "common",
+    "value": 12,
+    "lockBonus": 2,
+    "description": "Four picks and a tension wrench, all of them reshaped at least once."
+  },
+  "coil_of_line": {
+    "id": "coil_of_line",
+    "name": "Coil of Line",
+    "rarity": "common",
+    "value": 6,
+    "description": "Tarred river line. It has held heavier than you and it did not ask what for."
+  },
+  "iron_ledger": {
+    "id": "iron_ledger",
+    "name": "Iron Ledger",
+    "rarity": "common",
+    "value": 14,
+    "description": "Bound in banded iron so it survives the kind of conversation it tends to start."
+  },
+  "pit_lamp": {
+    "id": "pit_lamp",
+    "name": "Pit Lamp",
+    "rarity": "common",
+    "value": 9,
+    "description": "Gauze-shielded, so it will not set light to what it finds. It has been lit almost continuously since you were six."
+  },
+  "broken_sigil": {
+    "id": "broken_sigil",
+    "name": "Broken Sigil",
+    "rarity": "common",
+    "value": 2,
+    "description": "You put it down on the flagstones yourself. Picking it back up afterwards was not part of the plan."
+  },
+  "bundle_of_reeds": {
+    "id": "bundle_of_reeds",
+    "name": "Bundle of Reeds",
+    "rarity": "common",
+    "value": 4,
+    "description": "Cut on the right night, dried the right way. It is not respectable and it has never once failed you."
+  },
+  "cut_colours": {
+    "id": "cut_colours",
+    "name": "Cut Colours",
+    "rarity": "common",
+    "value": 1,
+    "description": "A strip of a standard, cut away rather than dropped. You have never been able to explain the difference and have stopped trying."
+  },
+  "gravebell": {
+    "id": "gravebell",
+    "name": "Grave-Bell",
+    "rarity": "common",
+    "slot": "weapon",
+    "damage": "1d8",
+    "ability": "cha",
+    "range": "ranged",
+    "value": 20,
+    "description": "Small, cold, and it never quite stops ringing. You have stopped mentioning that to people."
+  },
+  "wardens_key": {
+    "id": "wardens_key",
+    "name": "The Warden's Key",
+    "rarity": "rare",
+    "slot": "trinket",
+    "ac": 1,
+    "keyItem": true,
+    "value": 0,
+    "description": "It opens nothing in the Hollow Crypt. Everyone who has carried one out says the same thing: it gets warmer the closer you get to Ashvault."
+  },
+  "warden_crown": {
+    "id": "warden_crown",
+    "name": "Crown of Keeping",
+    "rarity": "epic",
+    "slot": "trinket",
+    "ac": 2,
+    "saveBonus": 1,
+    "value": 600,
+    "description": "Iron, and far too heavy for a head. It was never meant to be worn so much as carried, by someone who was not allowed to put it down."
+  },
+  "husk-iron_blade": {
+    "id": "husk-iron_blade",
+    "name": "Husk-Iron Blade",
+    "rarity": "epic",
+    "slot": "weapon",
+    "damage": "1d12",
+    "ability": "str",
+    "range": "melee",
+    "value": 650,
+    "description": "Forged out of whatever the Crypt had to hand, which was largely the previous occupants. It is lighter than it has any business being."
+  },
+  "sanctum_shroud": {
+    "id": "sanctum_shroud",
+    "name": "Sanctum Shroud",
+    "rarity": "epic",
+    "slot": "trinket",
+    "ac": 3,
+    "value": 620,
+    "description": "Grave-linen that has been somewhere very cold and come back wrong. Things aim slightly to the left of whoever wears it."
+  },
+  "wisp_lantern": {
+    "id": "wisp_lantern",
+    "name": "Caught Wisp",
+    "rarity": "rare",
+    "slot": "trinket",
+    "ac": 1,
+    "saveBonus": 1,
+    "value": 280,
+    "description": "One of the gallery lights, shut in a jar. It has not stopped moving and it has not forgiven you."
+  },
+  "marrow_draught": {
+    "id": "marrow_draught",
+    "name": "Marrow Draught",
+    "rarity": "rare",
+    "consumable": true,
+    "heal": "6d4+6",
+    "combatUse": true,
+    "value": 180,
+    "description": "Thick and faintly warm, and it was not warm when you picked it up."
+  }
+}

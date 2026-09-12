@@ -1,0 +1,387 @@
+<title>Dark Glory Delta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#E9EBEA; --raise:#F4F5F4;
+    --ink:#14191A; --ink-soft:#4A5456; --ink-faint:#6E7876;
+    --rule:#CDD3D2; --rule-soft:#DDE2E1;
+    --accent:#8C3B1E;
+    --agrees:#416B4C; --differs:#8A6A14; --conflicts:#9B3227; --adds:#43557E; --silent:#6B6560;
+    --agrees-bg:#416B4C18; --differs-bg:#8A6A1418; --conflicts-bg:#9B322718; --adds-bg:#43557E18; --silent-bg:#6B656018;
+    --party:#6D4B7A;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;
+    --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;
+    --shell:1180px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#101415; --raise:#181D1E;
+      --ink:#DFE4E3; --ink-soft:#96A1A0; --ink-faint:#77817F;
+      --rule:#2A3132; --rule-soft:#212728;
+      --accent:#D57249;
+      --agrees:#84AE7C; --differs:#D2A63F; --conflicts:#DE7A68; --adds:#8BA2D0; --silent:#9C968F;
+      --agrees-bg:#84AE7C1A; --differs-bg:#D2A63F1A; --conflicts-bg:#DE7A681A; --adds-bg:#8BA2D01A; --silent-bg:#9C968F1A;
+      --party:#B492C2;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#101415; --raise:#181D1E;
+    --ink:#DFE4E3; --ink-soft:#96A1A0; --ink-faint:#77817F;
+    --rule:#2A3132; --rule-soft:#212728;
+    --accent:#D57249;
+    --agrees:#84AE7C; --differs:#D2A63F; --conflicts:#DE7A68; --adds:#8BA2D0; --silent:#9C968F;
+    --agrees-bg:#84AE7C1A; --differs-bg:#D2A63F1A; --conflicts-bg:#DE7A681A; --adds-bg:#8BA2D01A; --silent-bg:#9C968F1A;
+    --party:#B492C2;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:var(--sans); font-size:15px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .shell{max-width:var(--shell); margin:0 auto; padding:0 24px;}
+
+  .masthead{padding:52px 0 28px; border-bottom:2px solid var(--ink);}
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; font-weight:500;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+    display:flex; gap:10px; flex-wrap:wrap; align-items:baseline;
+  }
+  .eyebrow .sep{color:var(--ink-faint);}
+  h1{
+    font-family:var(--serif); font-weight:700; font-size:clamp(2.3rem,5.4vw,3.5rem);
+    line-height:1.04; letter-spacing:-.015em; margin:14px 0 0; text-wrap:balance;
+  }
+  .standfirst{
+    font-family:var(--serif); font-size:clamp(1.02rem,2.1vw,1.2rem); font-weight:500;
+    color:var(--ink-soft); max-width:60ch; margin:14px 0 0; line-height:1.55;
+  }
+
+  .tally{
+    display:grid; grid-template-columns:repeat(5,1fr);
+    border:1px solid var(--rule); border-radius:3px; overflow:hidden;
+    margin:28px 0 0; background:var(--raise);
+  }
+  .tally div{padding:14px 16px; border-right:1px solid var(--rule);}
+  .tally div:last-child{border-right:0;}
+  .tally b{
+    display:block; font-family:var(--mono); font-weight:600; font-size:1.85rem;
+    line-height:1; font-variant-numeric:tabular-nums;
+  }
+  .tally span{
+    display:block; margin-top:7px; font-family:var(--mono); font-size:10.5px;
+    letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint);
+  }
+  .t-agrees b{color:var(--agrees);} .t-differs b{color:var(--differs);}
+  .t-conflicts b{color:var(--conflicts);} .t-adds b{color:var(--adds);} .t-silent b{color:var(--silent);}
+
+  .legend{
+    margin:22px 0 0; display:grid; gap:9px;
+    grid-template-columns:repeat(auto-fit,minmax(275px,1fr));
+  }
+  .legend p{margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.5;}
+  .legend p strong{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
+  .l-agrees strong{color:var(--agrees);} .l-differs strong{color:var(--differs);}
+  .l-conflicts strong{color:var(--conflicts);} .l-adds strong{color:var(--adds);} .l-silent strong{color:var(--silent);}
+
+  .filterbar{
+    position:sticky; top:0; z-index:20; background:var(--ground);
+    border-bottom:1px solid var(--rule); padding:12px 0; margin-top:34px;
+  }
+  .filters{display:flex; gap:7px; flex-wrap:wrap; align-items:center;}
+  .filters .lbl{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--ink-faint); margin-right:4px;
+  }
+  .fbtn{
+    font-family:var(--mono); font-size:11.5px; font-weight:500; letter-spacing:.05em;
+    padding:6px 12px; border:1px solid var(--rule); background:var(--raise);
+    color:var(--ink-soft); border-radius:2px; cursor:pointer; transition:.13s;
+  }
+  .fbtn:hover{border-color:var(--ink-faint); color:var(--ink);}
+  .fbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .fbtn[aria-pressed="true"]{background:var(--ink); color:var(--ground); border-color:var(--ink);}
+  .fbtn[data-f="agrees"][aria-pressed="true"]{background:var(--agrees); border-color:var(--agrees); color:var(--ground);}
+  .fbtn[data-f="differs"][aria-pressed="true"]{background:var(--differs); border-color:var(--differs); color:var(--ground);}
+  .fbtn[data-f="conflicts"][aria-pressed="true"]{background:var(--conflicts); border-color:var(--conflicts); color:var(--ground);}
+  .fbtn[data-f="adds"][aria-pressed="true"]{background:var(--adds); border-color:var(--adds); color:var(--ground);}
+  .fbtn[data-f="silent"][aria-pressed="true"]{background:var(--silent); border-color:var(--silent); color:var(--ground);}
+
+  section{margin-top:46px;}
+  .sechead{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; padding-bottom:10px; border-bottom:1px solid var(--ink);}
+  .secnum{font-family:var(--mono); font-size:12px; font-weight:600; color:var(--accent); letter-spacing:.08em;}
+  .sechead h2{font-family:var(--serif); font-weight:600; font-size:1.42rem; margin:0; letter-spacing:-.01em;}
+  .seccount{
+    margin-left:auto; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-faint); font-variant-numeric:tabular-nums;
+  }
+
+  .colhead{
+    display:grid; grid-template-columns:1.05fr 1.5fr 1.5fr 128px; gap:18px;
+    padding:11px 14px 8px 16px;
+    font-family:var(--mono); font-size:10px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--ink-faint);
+  }
+  .colhead .dg{color:var(--accent);}
+
+  .row{
+    display:grid; grid-template-columns:1.05fr 1.5fr 1.5fr 128px; gap:18px;
+    padding:13px 14px 13px 16px; border-bottom:1px solid var(--rule-soft);
+    border-left:3px solid transparent; align-items:start;
+  }
+  .row:hover{background:var(--raise);}
+  .row .area{font-weight:600; font-size:14px; line-height:1.45;}
+  .row .built, .row .dg{font-size:13.5px; color:var(--ink-soft); line-height:1.5;}
+  .row .dg{color:var(--ink);}
+  .rowlabel{display:none;}
+
+  .pill{
+    font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.11em;
+    text-transform:uppercase; padding:3px 8px; border-radius:2px;
+    white-space:nowrap; display:inline-block;
+  }
+  .party{
+    display:inline-block; margin-top:6px;
+    font-family:var(--mono); font-size:9.5px; font-weight:500; letter-spacing:.09em;
+    text-transform:uppercase; color:var(--party);
+    border:1px dashed var(--party); border-radius:2px; padding:2px 6px;
+  }
+
+  .row[data-v="agrees"]{border-left-color:var(--agrees);}
+  .row[data-v="agrees"] .pill{background:var(--agrees-bg); color:var(--agrees);}
+  .row[data-v="differs"]{border-left-color:var(--differs);}
+  .row[data-v="differs"] .pill{background:var(--differs-bg); color:var(--differs);}
+  .row[data-v="conflicts"]{border-left-color:var(--conflicts);}
+  .row[data-v="conflicts"] .pill{background:var(--conflicts-bg); color:var(--conflicts);}
+  .row[data-v="adds"]{border-left-color:var(--adds);}
+  .row[data-v="adds"] .pill{background:var(--adds-bg); color:var(--adds);}
+  .row[data-v="silent"]{border-left-color:var(--silent);}
+  .row[data-v="silent"] .pill{background:var(--silent-bg); color:var(--silent);}
+
+  body[data-filter]:not([data-filter="all"]) .row{display:none;}
+  body[data-filter="agrees"] .row[data-v="agrees"],
+  body[data-filter="differs"] .row[data-v="differs"],
+  body[data-filter="conflicts"] .row[data-v="conflicts"],
+  body[data-filter="adds"] .row[data-v="adds"],
+  body[data-filter="silent"] .row[data-v="silent"]{display:grid;}
+  section.empty{display:none;}
+
+  .closer{margin:60px 0 70px; padding-top:26px; border-top:2px solid var(--ink);}
+  .closer h2{font-family:var(--serif); font-weight:600; font-size:1.42rem; margin:0 0 16px;}
+  .verdicts{display:grid; gap:14px;}
+  .verdict{
+    display:grid; grid-template-columns:104px 1fr; gap:18px;
+    padding:15px 0; border-bottom:1px solid var(--rule-soft); align-items:start;
+  }
+  .verdict:last-child{border-bottom:0;}
+  .verdict .vk{
+    font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.11em;
+    text-transform:uppercase; color:var(--accent); padding-top:3px;
+  }
+  .verdict p{margin:0; font-size:14px; line-height:1.6; color:var(--ink-soft); max-width:64ch;}
+  .verdict p strong{color:var(--ink); font-weight:600;}
+  footer{
+    padding-bottom:60px; font-family:var(--mono); font-size:11px;
+    color:var(--ink-faint); letter-spacing:.05em;
+  }
+
+  @media (max-width:860px){
+    .tally{grid-template-columns:repeat(2,1fr);}
+    .tally div{border-bottom:1px solid var(--rule);}
+    .colhead{display:none;}
+    .row{grid-template-columns:1fr; gap:7px; padding:15px 14px 15px 16px;}
+    .rowlabel{
+      display:block; font-family:var(--mono); font-size:9.5px; letter-spacing:.13em;
+      text-transform:uppercase; color:var(--ink-faint); margin-bottom:2px;
+    }
+    .row .dg .rowlabel{color:var(--accent);}
+    .verdict{grid-template-columns:1fr; gap:6px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+
+<div class="shell">
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>Reconciliation</span><span class="sep">/</span>
+      <span>DarkGlorydesign.md &rarr; Ashvault build</span><span class="sep">/</span>
+      <span>12 Sep 2026</span>
+    </div>
+    <h1>Dark Glory Delta</h1>
+    <p class="standfirst">Every difference between the new design bible and the game as it actually stands after Phase&nbsp;1 &mdash; 66 points across all seven sections, so you can see what is already true, what is a real fork, and what would quietly disappear if the doc were adopted whole.</p>
+
+    <div class="tally">
+      <div class="t-agrees"><b>22</b><span>Agrees</span></div>
+      <div class="t-differs"><b>18</b><span>Differs</span></div>
+      <div class="t-conflicts"><b>10</b><span>Conflicts</span></div>
+      <div class="t-adds"><b>8</b><span>Adds</span></div>
+      <div class="t-silent"><b>8</b><span>Silent</span></div>
+    </div>
+
+    <div class="legend">
+      <p class="l-agrees"><strong>Agrees</strong> &mdash; already built this way. Nothing to do.</p>
+      <p class="l-differs"><strong>Differs</strong> &mdash; both versions work. Pick one.</p>
+      <p class="l-conflicts"><strong>Conflicts</strong> &mdash; contradicts something built. You cannot have both.</p>
+      <p class="l-adds"><strong>Adds</strong> &mdash; new to the design. Nothing to reconcile.</p>
+      <p class="l-silent"><strong>Silent</strong> &mdash; the doc never mentions it. Adopting it whole would drop this.</p>
+    </div>
+  </header>
+
+  <div class="filterbar">
+    <div class="filters">
+      <span class="lbl">Show</span>
+      <button class="fbtn" data-f="all" aria-pressed="true">All 66</button>
+      <button class="fbtn" data-f="agrees" aria-pressed="false">Agrees 22</button>
+      <button class="fbtn" data-f="differs" aria-pressed="false">Differs 18</button>
+      <button class="fbtn" data-f="conflicts" aria-pressed="false">Conflicts 10</button>
+      <button class="fbtn" data-f="adds" aria-pressed="false">Adds 8</button>
+      <button class="fbtn" data-f="silent" aria-pressed="false">Silent 8</button>
+    </div>
+  </div>
+
+  <section>
+    <div class="sechead"><span class="secnum">&sect;1</span><h2>Core Dice System</h2><span class="seccount">11 points</span></div>
+    <div class="colhead"><span>Area</span><span>Built now</span><span class="dg">Dark Glory</span><span>Verdict</span></div>
+
+    <div class="row" data-v="agrees"><div class="area">Resolution formula</div><div class="built"><span class="rowlabel">Built now</span>d20 + modifier vs a target number, meet or beat</div><div class="dg"><span class="rowlabel">Dark Glory</span>Identical</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Critical hit</div><div class="built"><span class="rowlabel">Built now</span>Nat 20: damage dice rolled twice, modifier added once</div><div class="dg"><span class="rowlabel">Dark Glory</span>Nat 20: damage dice rerolled and added, not doubled</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Fumble</div><div class="built"><span class="rowlabel">Built now</span>Nat 1 on an attack is an automatic miss</div><div class="dg"><span class="rowlabel">Dark Glory</span>Identical</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="silent"><div class="area">Nat 20 / 1 on checks and saves</div><div class="built"><span class="rowlabel">Built now</span>No special effect &mdash; only attacks crit or fumble</div><div class="dg"><span class="rowlabel">Dark Glory</span>Not addressed</div><div><span class="pill">Silent</span></div></div>
+    <div class="row" data-v="silent"><div class="area">Advantage / disadvantage</div><div class="built"><span class="rowlabel">Built now</span>Roll 2d20 keep high or low. Never stacks.</div><div class="dg"><span class="rowlabel">Dark Glory</span>Never mentioned anywhere in the doc</div><div><span class="pill">Silent</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Ability scores</div><div class="built"><span class="rowlabel">Built now</span>Six stats, modifier = floor((score &minus; 10) / 2)</div><div class="dg"><span class="rowlabel">Dark Glory</span>Same six, same formula</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Stat generation</div><div class="built"><span class="rowlabel">Built now</span>4d6 drop lowest, six times, server-rolled</div><div class="dg"><span class="rowlabel">Dark Glory</span>Identical</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="conflicts"><div class="area">Assigning the rolls</div><div class="built"><span class="rowlabel">Built now</span>Player assigns all six freely &mdash; agency matters when a run can end in 20 minutes</div><div class="dg"><span class="rowlabel">Dark Glory</span>&ldquo;Once per stat&rdquo; &mdash; rolled in fixed order, no assignment</div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="silent"><div class="area">Rerolling the pool</div><div class="built"><span class="rowlabel">Built now</span>Forbidden. The pool you get is the character you get.</div><div class="dg"><span class="rowlabel">Dark Glory</span>Not addressed</div><div><span class="pill">Silent</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Manual / physical dice</div><div class="built"><span class="rowlabel">Built now</span>Flagged unverified, solo content only, bars leaderboards</div><div class="dg"><span class="rowlabel">Dark Glory</span>Flagged unverified, excluded from anti-cheat checks</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Where bonuses come from</div><div class="built"><span class="rowlabel">Built now</span>Proficiency +2 at L1&ndash;4, +3 at L5&ndash;8, plus stat modifier</div><div class="dg"><span class="rowlabel">Dark Glory</span>No feats, subclasses or multiclassing &mdash; stat + class + level only</div><div><span class="pill">Agrees</span></div></div>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="secnum">&sect;2</span><h2>Combat Resolution</h2><span class="seccount">8 points</span></div>
+    <div class="colhead"><span>Area</span><span>Built now</span><span class="dg">Dark Glory</span><span>Verdict</span></div>
+
+    <div class="row" data-v="agrees"><div class="area">Initiative</div><div class="built"><span class="rowlabel">Built now</span>d20 + DEX, rolled once, order holds for the encounter</div><div class="dg"><span class="rowlabel">Dark Glory</span>Identical</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Turn order shape</div><div class="built"><span class="rowlabel">Built now</span>Players and monsters interleaved in one single order</div><div class="dg"><span class="rowlabel">Dark Glory</span>Identical, and for the same stated reason</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Initiative tie-break</div><div class="built"><span class="rowlabel">Built now</span>Higher DEX, then stable roll id</div><div class="dg"><span class="rowlabel">Dark Glory</span>Higher DEX, then a server coin-flip</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="conflicts"><div class="area">Actions per turn</div><div class="built"><span class="rowlabel">Built now</span>One action, one bonus action, plus free actions</div><div class="dg"><span class="rowlabel">Dark Glory</span>One action only</div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Flee check</div><div class="built"><span class="rowlabel">Built now</span>DC 12 DEX, +2 in flooded rooms</div><div class="dg"><span class="rowlabel">Dark Glory</span>DC set per enemy type &mdash; slow zombie low, dire wolf high</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Failed flee</div><div class="built"><span class="rowlabel">Built now</span>Every enemy in the room gets a free attack on you</div><div class="dg"><span class="rowlabel">Dark Glory</span>Costs the turn, you stay in combat, no free attacks</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="silent"><div class="area">Fleeing a boss</div><div class="built"><span class="rowlabel">Built now</span>Impossible &mdash; the door bars on entry, stated before the fight</div><div class="dg"><span class="rowlabel">Dark Glory</span>Not addressed</div><div><span class="pill">Silent</span></div></div>
+    <div class="row" data-v="conflicts"><div class="area">Reaching 0 HP</div><div class="built"><span class="rowlabel">Built now</span>Dead. Committed in the same transaction as the killing blow.</div><div class="dg"><span class="rowlabel">Dark Glory</span>Downed &mdash; out of the fight, untargetable, revival window opens</div><div><span class="pill">Conflicts</span></div></div>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="secnum">&sect;3</span><h2>Classes &amp; Backgrounds</h2><span class="seccount">10 points</span></div>
+    <div class="colhead"><span>Area</span><span>Built now</span><span class="dg">Dark Glory</span><span>Verdict</span></div>
+
+    <div class="row" data-v="conflicts"><div class="area">Character identity</div><div class="built"><span class="rowlabel">Built now</span>Weapon &times; background. There are no classes.</div><div class="dg"><span class="rowlabel">Dark Glory</span>Five fixed classes, chosen from a roster</div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="conflicts"><div class="area">How many combinations</div><div class="built"><span class="rowlabel">Built now</span>32 playable today, 79 authored and waiting</div><div class="dg"><span class="rowlabel">Dark Glory</span>5 classes &times; 4 backgrounds = 20</div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Fighter, Cleric, Shadowblade, Emberwright</div><div class="built"><span class="rowlabel">Built now</span>Already exist as Longsword, Warding Lantern, Paired Daggers and Staff</div><div class="dg"><span class="rowlabel">Dark Glory</span>The same four roles, named as classes</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="adds"><div class="area">Necromancer</div><div class="built"><span class="rowlabel">Built now</span>Does not exist in any form</div><div class="dg"><span class="rowlabel">Dark Glory</span>New class. CHA primary, d6 hit die, <em>Raise Zombie</em>. The whole Zombie fork hangs off it.</div><div><span class="pill">Adds</span></div></div>
+    <div class="row" data-v="differs"><div class="area">The four backgrounds</div><div class="built"><span class="rowlabel">Built now</span>Gravedigger, Caravan Guard, Disgraced Scholar, Gutter Rat</div><div class="dg"><span class="rowlabel">Dark Glory</span>Soldier, Scholar, Outlaw, Merchant &mdash; three map cleanly onto existing ones</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">What a background gives</div><div class="built"><span class="rowlabel">Built now</span>+1 ability, a skill proficiency, and a two-ability track</div><div class="dg"><span class="rowlabel">Dark Glory</span>A flat +2 to one category of roll</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="conflicts"><div class="area">Do bonuses stack</div><div class="built"><span class="rowlabel">Built now</span>Weapon track and background track both apply &mdash; this is what makes 32 kits distinct</div><div class="dg"><span class="rowlabel">Dark Glory</span>Only the higher applies. Never both.</div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">HP at level 1</div><div class="built"><span class="rowlabel">Built now</span>Maximum hit die + CON modifier, never rolled</div><div class="dg"><span class="rowlabel">Dark Glory</span>Identical, and for the same stated reason</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">HP on level up</div><div class="built"><span class="rowlabel">Built now</span>Roll the hit die + CON modifier, minimum 1</div><div class="dg"><span class="rowlabel">Dark Glory</span>Roll the hit die + CON modifier</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="silent"><div class="area">Prologues</div><div class="built"><span class="rowlabel">Built now</span>Ten per-background openings, two rooms each, converging on a shared Descent</div><div class="dg"><span class="rowlabel">Dark Glory</span>Not mentioned. The game begins at the Crypt Entrance.</div><div><span class="pill">Silent</span></div></div>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="secnum">&sect;4</span><h2>Permadeath</h2><span class="seccount">11 points &middot; the biggest change</span></div>
+    <div class="colhead"><span>Area</span><span>Built now</span><span class="dg">Dark Glory</span><span>Verdict</span></div>
+
+    <div class="row" data-v="conflicts"><div class="area">What 0 HP means</div><div class="built"><span class="rowlabel">Built now</span>Immediate, final death. No downed state, no bleed-out.</div><div class="dg"><span class="rowlabel">Dark Glory</span>Downed, not dead. Death is resolved after the fight instead of during it.</div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="adds"><div class="area">Revival window</div><div class="built"><span class="rowlabel">Built now</span>None</div><div class="dg"><span class="rowlabel">Dark Glory</span>Ten real-world minutes, running in real time so it outlasts the fight<span class="party">Needs a party</span></div><div><span class="pill">Adds</span></div></div>
+    <div class="row" data-v="conflicts"><div class="area">Who can bring you back</div><div class="built"><span class="rowlabel">Built now</span>A Lantern's <em>Last Breath</em>. Once per character lifetime, never on themself.</div><div class="dg"><span class="rowlabel">Dark Glory</span>A Cleric's <em>Mend</em>, or a Necromancer's <em>Raise Zombie</em><span class="party">Needs a party</span></div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="adds"><div class="area">Contested revival</div><div class="built"><span class="rowlabel">Built now</span>Not applicable</div><div class="dg"><span class="rowlabel">Dark Glory</span>First ability the server processes wins. The other fails as &ldquo;already revived&rdquo;.<span class="party">Needs a party</span></div><div><span class="pill">Adds</span></div></div>
+    <div class="row" data-v="adds"><div class="area">The Zombie fork</div><div class="built"><span class="rowlabel">Built now</span>Does not exist</div><div class="dg"><span class="rowlabel">Dark Glory</span>Survive as a Zombie: two actions only, large HP pool, cannot be healed, no second window, locked out of the hub forever<span class="party">Needs a party</span></div><div><span class="pill">Adds</span></div></div>
+    <div class="row" data-v="conflicts"><div class="area">Corpse and inventory</div><div class="built"><span class="rowlabel">Built now</span>Destroyed outright. No corpse, no corpse run, nothing recoverable.</div><div class="dg"><span class="rowlabel">Dark Glory</span>Drops on the ground at the death site, lootable once the window expires</div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="adds"><div class="area">Looter with a full bag</div><div class="built"><span class="rowlabel">Built now</span>Not applicable</div><div class="dg"><span class="rowlabel">Dark Glory</span>Pickup simply fails, and the item can be lost permanently<span class="party">Needs a party</span></div><div><span class="pill">Adds</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">The character record</div><div class="built"><span class="rowlabel">Built now</span>Archived, never deleted, shown on a memorial wall</div><div class="dg"><span class="rowlabel">Dark Glory</span>Archived as a death-log entry feeding Phase 5 leaderboards</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">What survives death</div><div class="built"><span class="rowlabel">Built now</span>The account-bound vault, dice sets, achievements. Nothing else.</div><div class="dg"><span class="rowlabel">Dark Glory</span>Nothing carries over except the account-bound bank</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Hub access</div><div class="built"><span class="rowlabel">Built now</span>Re-earned by every new character, by beating the boss again</div><div class="dg"><span class="rowlabel">Dark Glory</span>Identical &mdash; and explicitly also after zombification</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Cooldown on a new character</div><div class="built"><span class="rowlabel">Built now</span>None. Roll again immediately.</div><div class="dg"><span class="rowlabel">Dark Glory</span>None &mdash; the ten-minute window is itself the wait</div><div><span class="pill">Agrees</span></div></div>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="secnum">&sect;5</span><h2>World &amp; Dungeon</h2><span class="seccount">9 points</span></div>
+    <div class="colhead"><span>Area</span><span>Built now</span><span class="dg">Dark Glory</span><span>Verdict</span></div>
+
+    <div class="row" data-v="agrees"><div class="area">Tone</div><div class="built"><span class="rowlabel">Built now</span>Grim, survivors running businesses, unsentimental about death</div><div class="dg"><span class="rowlabel">Dark Glory</span>&ldquo;Darker, grimmer fantasy&rdquo;, chosen to reinforce the mechanics</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="differs"><div class="area">The first dungeon</div><div class="built"><span class="rowlabel">Built now</span>The Sunken Warrens &mdash; six nodes</div><div class="dg"><span class="rowlabel">Dark Glory</span>The Hollow Crypt &mdash; five nodes</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Dungeon shape</div><div class="built"><span class="rowlabel">Built now</span>Linear with one optional side room you can skip</div><div class="dg"><span class="rowlabel">Dark Glory</span>Branching &mdash; take Path A or Path B, never both, then reconverge</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="adds"><div class="area">The Rift Room</div><div class="built"><span class="rowlabel">Built now</span>Does not exist</div><div class="dg"><span class="rowlabel">Dark Glory</span>An unstable portal pulls part of the party into an isolated pocket zone with its own elite<span class="party">Needs a party</span></div><div><span class="pill">Adds</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Regular enemies</div><div class="built"><span class="rowlabel">Built now</span>Bloatrat, Bone Chorister, plus six prologue enemies</div><div class="dg"><span class="rowlabel">Dark Glory</span>Skeletal Husk, Grave Wisp, The Wight</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">The boss</div><div class="built"><span class="rowlabel">Built now</span>Maugrim, the Tidewarden &mdash; 40 HP, AC 15</div><div class="dg"><span class="rowlabel">Dark Glory</span>The Withered Warden &mdash; 40 HP, AC 14</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Boss mechanics</div><div class="built"><span class="rowlabel">Built now</span>Three phases: Undertow, rising water and the plinth, fire resistance, Drowning Song</div><div class="dg"><span class="rowlabel">Dark Glory</span>Two phases: plain brute, then a <em>Devour</em> that heals it for half the damage dealt</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="silent"><div class="area">Shrine rest</div><div class="built"><span class="rowlabel">Built now</span>One per dungeon, consumed on use &mdash; the central resource decision of a run</div><div class="dg"><span class="rowlabel">Dark Glory</span>Not mentioned, though abilities are costed &ldquo;per rest&rdquo; throughout</div><div><span class="pill">Silent</span></div></div>
+    <div class="row" data-v="silent"><div class="area">The First Camp</div><div class="built"><span class="rowlabel">Built now</span>A free rest where every prologue converges, before the dungeon proper</div><div class="dg"><span class="rowlabel">Dark Glory</span>Not mentioned</div><div><span class="pill">Silent</span></div></div>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="secnum">&sect;6</span><h2>Bank &amp; Hub NPCs</h2><span class="seccount">9 points</span></div>
+    <div class="colhead"><span>Area</span><span>Built now</span><span class="dg">Dark Glory</span><span>Verdict</span></div>
+
+    <div class="row" data-v="agrees"><div class="area">Vault slots</div><div class="built"><span class="rowlabel">Built now</span>Two, account-bound, hard cap, never expandable</div><div class="dg"><span class="rowlabel">Dark Glory</span>Two, account-bound</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">When you pay</div><div class="built"><span class="rowlabel">Built now</span>On deposit only. Withdrawal is free.</div><div class="dg"><span class="rowlabel">Dark Glory</span>On deposit only, and for the same stated reason</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Fee amounts</div><div class="built"><span class="rowlabel">Built now</span>25 / 75 / 200 / 500 marks</div><div class="dg"><span class="rowlabel">Dark Glory</span>5 / 15 / 40 / 100, explicitly placeholder</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Top rarity tier</div><div class="built"><span class="rowlabel">Built now</span>Epic</div><div class="dg"><span class="rowlabel">Dark Glory</span>Legendary</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Slot reservation at death</div><div class="built"><span class="rowlabel">Built now</span>Dissolved &mdash; banking is in person and hub-only, so nothing is ever queued</div><div class="dg"><span class="rowlabel">Dark Glory</span>Same conclusion, reached by the same argument</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="differs"><div class="area">When both slots are full</div><div class="built"><span class="rowlabel">Built now</span>Swapping is a free withdrawal plus a full-price deposit</div><div class="dg"><span class="rowlabel">Dark Glory</span>The Banker refuses new deposits until a slot is freed</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Hub NPCs</div><div class="built"><span class="rowlabel">Built now</span>Five named: Vess Coldhand, Otho Pell, Sister Ambril, The Tallyman, Kesh</div><div class="dg"><span class="rowlabel">Dark Glory</span>Three by function: Weaponsmith, General Merchant, Banker</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">NPC personality</div><div class="built"><span class="rowlabel">Built now</span>Written, including a reaction line for each background</div><div class="dg"><span class="rowlabel">Dark Glory</span>Explicitly deferred to a later polish pass</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="silent"><div class="area">Healer and memorial</div><div class="built"><span class="rowlabel">Built now</span>Sister Ambril keeps the shrine and the wall of everyone the account has lost</div><div class="dg"><span class="rowlabel">Dark Glory</span>No healer NPC and no memorial in the roster</div><div><span class="pill">Silent</span></div></div>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="secnum">&sect;7</span><h2>Items &amp; Rarity</h2><span class="seccount">8 points</span></div>
+    <div class="colhead"><span>Area</span><span>Built now</span><span class="dg">Dark Glory</span><span>Verdict</span></div>
+
+    <div class="row" data-v="adds"><div class="area">Does rarity do anything</div><div class="built"><span class="rowlabel">Built now</span>No. Rarity is only a label that sets the bank fee.</div><div class="dg"><span class="rowlabel">Dark Glory</span>+0 / +1 / +2 / +3 to attack, damage and AC by tier &mdash; a real power curve</div><div><span class="pill">Adds</span></div></div>
+    <div class="row" data-v="adds"><div class="area">Unique effects</div><div class="built"><span class="rowlabel">Built now</span>None &mdash; the three rare drops are flat stat trinkets</div><div class="dg"><span class="rowlabel">Dark Glory</span>Rare gets one minor effect, Legendary one strong effect</div><div><span class="pill">Adds</span></div></div>
+    <div class="row" data-v="conflicts"><div class="area">Item categories</div><div class="built"><span class="rowlabel">Built now</span>Weapon, offhand, trinket, consumable &mdash; every rare boss drop is a trinket</div><div class="dg"><span class="rowlabel">Dark Glory</span>Weapons, armour, consumables. No trinket slot exists.</div><div><span class="pill">Conflicts</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Armour</div><div class="built"><span class="rowlabel">Built now</span>Intrinsic to the weapon kit, plus an optional shield</div><div class="dg"><span class="rowlabel">Dark Glory</span>A separate purchasable item category with its own AC tiers</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Consumable scaling</div><div class="built"><span class="rowlabel">Built now</span>Flat values written per item</div><div class="dg"><span class="rowlabel">Dark Glory</span>Potency scales by rarity tier</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Loot tables</div><div class="built"><span class="rowlabel">Built now</span>Fixed per room and per boss, hand-placed</div><div class="dg"><span class="rowlabel">Dark Glory</span>Fixed tables, explicitly not weighted random, until Phase 7</div><div><span class="pill">Agrees</span></div></div>
+    <div class="row" data-v="differs"><div class="area">Boss drop</div><div class="built"><span class="rowlabel">Built now</span>Tidewarden's Seal always, plus one roll on a table of three rares</div><div class="dg"><span class="rowlabel">Dark Glory</span>Always Rare or better, randomised and weighted toward the classes present</div><div><span class="pill">Differs</span></div></div>
+    <div class="row" data-v="agrees"><div class="area">Drops per kill</div><div class="built"><span class="rowlabel">Built now</span>One roll for the run, not one per player</div><div class="dg"><span class="rowlabel">Dark Glory</span>One per boss kill, not per player &mdash; the party splits or fights over it</div><div><span class="pill">Agrees</span></div></div>
+  </section>
+
+  <div class="closer">
+    <h2>What this adds up to</h2>
+    <div class="verdicts">
+      <div class="verdict"><span class="vk">Mostly agrees</span><p>Two thirds of the doc is either <strong>already built or a free addition</strong>. The dice system, initiative, HP curve, bank rules and permadeath economics all match &mdash; often argued from the same reasoning. This is not a rewrite of the foundations.</p></div>
+      <div class="verdict"><span class="vk">Six need a party</span><p>The Downed window, contested revival, the Zombie fork, corpse looting and the Rift Room all require <strong>other players in the room</strong>. Solo, a ten-minute revival timer nobody can answer is strictly worse than instant death &mdash; ten minutes of waiting to be told you already lost.</p></div>
+      <div class="verdict"><span class="vk">Three real forks</span><p><strong>Classes vs weapon&nbsp;&times;&nbsp;background.</strong> Four of the five classes already exist as weapons; only the Necromancer is new. <strong>Bonus stacking.</strong> Turning stacking off would flatten 32 distinct kits back toward 9. <strong>Trinkets.</strong> Dropping the slot orphans all three rare boss drops.</p></div>
+      <div class="verdict"><span class="vk">Eight would vanish</span><p>The doc is silent on advantage, the shrine rest, the First Camp, the ten prologues, boss rooms you cannot flee, and the memorial. Adopting it as a clean replacement would <strong>delete these without ever saying so</strong> &mdash; which is the real risk of treating a from-scratch bible as a patch.</p></div>
+      <div class="verdict"><span class="vk">Best single idea</span><p>The <strong>Necromancer and the Zombie fork</strong>. It turns death from a full stop into a branch, and the Warden's <em>Devour</em> mirroring the Zombie's own ability ties the boss to the game's spine instead of being a one-off gimmick. Worth building even if nothing else here lands.</p></div>
+    </div>
+  </div>
+
+  <footer>DarkGlorydesign.md &middot; 223 lines &middot; 7 sections &middot; compared against Ashvault at Phase 1 complete, 83 tests passing</footer>
+</div>
+
+<script>
+  (function(){
+    var bar = document.querySelector('.filters');
+    var btns = Array.prototype.slice.call(bar.querySelectorAll('.fbtn'));
+    var sections = Array.prototype.slice.call(document.querySelectorAll('section'));
+    document.body.setAttribute('data-filter','all');
+
+    bar.addEventListener('click', function(e){
+      var btn = e.target.closest('.fbtn');
+      if(!btn) return;
+      var f = btn.getAttribute('data-f');
+      btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b === btn)); });
+      document.body.setAttribute('data-filter', f);
+      sections.forEach(function(s){
+        var shown = f === 'all' || s.querySelector('.row[data-v="' + f + '"]');
+        s.classList.toggle('empty', !shown);
+      });
+    });
+  })();
+</script>

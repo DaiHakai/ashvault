@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Ashvault</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ----------------------------------------------------------- account -->
+    <section id="auth" class="screen auth-screen">
+      <div class="auth-card">
+        <header class="masthead">
+          <h1>ASHVAULT</h1>
+          <p class="tagline">Bring a name. The vault remembers the rest.</p>
+        </header>
+        <div class="panel auth-panel">
+          <h2 id="auth-title">Claim your name</h2>
+          <p id="auth-note" class="note">No password. Your browser remembers you; keep the Vault Key shown once after creation.</p>
+          <label id="auth-name-wrap" class="auth-label">Display name
+            <input id="auth-name" type="text" minlength="3" maxlength="20" autocomplete="nickname" placeholder="What should the city call you?" />
+          </label>
+          <label id="auth-key-wrap" class="auth-label hidden">Vault Key
+            <input id="auth-key" type="text" autocomplete="off" autocapitalize="characters" placeholder="VAULT-XXXX-XXXX-XXXX" />
+          </label>
+          <p id="auth-error" class="error" role="alert"></p>
+          <button id="auth-submit" type="button">Create account</button>
+          <button id="auth-switch" type="button" class="link-btn">I have a Vault Key</button>
+          <div id="key-reveal" class="key-reveal hidden" role="status">
+            <div id="key-reveal-text"></div>
+            <button id="key-continue" type="button">I saved it — enter Ashvault</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- character creation -->
+    <section id="creation" class="screen hidden">
+      <header class="masthead">
+        <h1>ASHVAULT</h1>
+        <p class="tagline">Nothing below is a safe zone.</p>
+      </header>
+
+      <div class="creation-layout">
+
+        <!-- the figure -->
+        <div class="model-stage">
+          <div class="model-frame">
+            <div class="model-frame-inner">
+              <div id="model" class="model" aria-live="polite"></div>
+            </div>
+            <div class="model-plate">
+              <span id="model-name" class="model-name">Nobody yet</span>
+              <span id="model-tag" class="model-tag">A weapon and a past make a person</span>
+            </div>
+          </div>
+          <p id="model-blurb" class="model-blurb"></p>
+          <p id="model-hook" class="model-hook"></p>
+        </div>
+
+        <!-- the choices -->
+        <div class="choice-stack">
+          <div class="panel">
+            <h2>1 · Weapon</h2>
+            <div id="weapon-list" class="chips"></div>
+          </div>
+
+          <div class="panel">
+            <h2>2 · Background</h2>
+            <div id="background-list" class="chips"></div>
+          </div>
+
+          <div class="panel">
+            <h2>3 · The dice</h2>
+            <p class="note">
+              Four dice, drop the lowest, six times. Assign them as you like.
+              <strong>There is no reroll.</strong>
+            </p>
+            <div id="assign" class="assign"></div>
+          </div>
+
+          <div class="panel">
+            <h2>4 · Name</h2>
+            <label class="namefield">
+              <input id="char-name" type="text" maxlength="24" autocomplete="off" spellcheck="false"
+                     placeholder="Who is going down there?" aria-label="Character name" />
+            </label>
+            <p id="creation-error" class="error" role="alert"></p>
+            <button id="begin" type="button" disabled>Begin the descent</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------- the game -->
+    <section id="game" class="screen hidden">
+      <main class="terminal">
+        <div id="log" class="log" role="log" aria-live="polite" aria-label="Game log"></div>
+
+        <div id="tray" class="tray" aria-live="polite" aria-label="Dice"></div>
+
+        <form id="prompt-form" class="prompt" autocomplete="off">
+          <span class="caret" aria-hidden="true">&gt;</span>
+          <input id="prompt" type="text" autocomplete="off" spellcheck="false"
+                 aria-label="Command" placeholder="look, move north, attack, help…" />
+          <button type="submit" class="sr-only">Send</button>
+          <button type="button" id="mute" class="mute" aria-pressed="false"
+                  title="Sound (M)" aria-label="Toggle sound">♪</button>
+        </form>
+      </main>
+
+      <aside class="sheet" aria-label="Character sheet">
+        <!-- character frame: portrait + vitals -->
+        <div class="char-frame">
+          <div class="char-portrait" id="sheet-portrait"></div>
+          <div class="char-ident">
+            <span id="sheet-name" class="char-name"></span>
+            <span id="sheet-class" class="char-class"></span>
+            <span id="sheet-badges" class="char-badges"></span>
+          </div>
+        </div>
+
+        <div id="sheet-bars" class="bars"></div>
+        <div id="sheet-account" class="account-code" aria-label="Friend code"></div>
+        <div id="sheet-room" class="sheet-block"></div>
+        <div id="sheet-enemies" class="sheet-block"></div>
+        <div id="sheet-abilities" class="sheet-block"></div>
+        <div id="sheet-inventory" class="sheet-block"></div>
+        <div id="sheet-stats" class="sheet-block"></div>
+      </aside>
+    </section>
+
+    <!-- ------------------------------------------------------------- the hub -->
+    <section id="hub" class="screen hidden">
+      <div class="hub-wrap">
+        <header class="hub-head">
+          <h1>ASHVAULT</h1>
+          <p class="tagline">The gate is behind you. It stays behind you.</p>
+        </header>
+
+        <div class="hub-grid">
+          <!-- character frame -->
+          <div class="hub-char">
+            <div class="model-frame">
+              <div class="model-frame-inner">
+                <div id="hub-portrait" class="model"></div>
+              </div>
+              <div class="model-plate">
+                <span id="hub-name" class="model-name"></span>
+                <span id="hub-tag" class="model-tag"></span>
+              </div>
+            </div>
+            <div id="hub-vitals" class="hub-vitals"></div>
+            <button id="hub-return" type="button" class="ghost-btn">Back to the log</button>
+          </div>
+
+          <!-- the city -->
+          <div class="hub-panels">
+            <div class="hub-panel">
+              <h3>Global chat <span class="phase-tag">Phase 3</span></h3>
+              <div class="hub-chat">
+                <p class="chat-line"><span class="chat-who">Vess Coldhand</span> Deposits are twenty-five a slot and I do not haggle.</p>
+                <p class="chat-line"><span class="chat-who">Otho Pell</span> And how is your last one getting on? Oh. Oh, I am sorry.</p>
+                <p class="chat-line chat-system">Real-time chat arrives with the Socket.io layer in Phase 3.</p>
+              </div>
+              <div class="hub-chat-input"><span class="caret">&gt;</span><span class="chat-ph">say something…</span></div>
+            </div>
+
+            <div class="hub-panel">
+              <h3>Who is here <span class="phase-tag">Phase 3</span></h3>
+              <ul id="hub-players" class="hub-players"></ul>
+            </div>
+
+            <div class="hub-panel">
+              <h3>The Vault <span class="phase-tag">Phase 3</span></h3>
+              <p class="hub-note">Two slots. Account-wide. Never expandable. Deposits cost by rarity; withdrawals are free.</p>
+              <div class="vault-slots">
+                <div class="vault-slot"><span class="slot-index">I</span><span class="slot-empty">empty</span></div>
+                <div class="vault-slot"><span class="slot-index">II</span><span class="slot-empty">empty</span></div>
+              </div>
+              <p class="hub-note dim">Your vault survives death. Reaching it does not — every new character earns the way back in.</p>
+            </div>
+
+            <div class="hub-panel">
+              <h3>Party <span class="phase-tag">Phase 4</span></h3>
+              <p class="hub-note">Group dungeons, shared initiative and loot rules land with Phase 4.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="audio.js"></script>
+  <script src="portraits.js"></script>
+  <script src="dice.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

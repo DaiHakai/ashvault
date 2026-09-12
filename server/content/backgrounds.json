@@ -1,0 +1,276 @@
+{
+  "_comment": "Backgrounds are the story half of a character (GAME_DESIGN §3). Each owns a two-room prologue and contributes a title prefix; the weapon contributes the noun, so background x weapon generates the character's identity.",
+  "gravedigger": {
+    "id": "gravedigger",
+    "name": "Gravedigger",
+    "abilityBonus": {
+      "con": 1
+    },
+    "skillProficiency": "perception",
+    "startingItem": "iron_spade",
+    "blurb": "Twelve years of putting people in the ground. You know what a body looks like before it stops being a person, and you stopped flinching a long time ago.",
+    "hubHook": "Sister Ambril lets you into the crypt beneath the shrine without asking why.",
+    "hubHookNpc": "ambril",
+    "prologue": "pro_gravedigger_1",
+    "abilities": [
+      {
+        "id": "unflinching",
+        "level": 1
+      },
+      {
+        "id": "deadweight",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "tome": "You never learned your letters. In your hands the book is a heavy thing and nothing else."
+    }
+  },
+  "caravan_guard": {
+    "id": "caravan_guard",
+    "name": "Caravan Guard",
+    "abilityBonus": {
+      "str": 1
+    },
+    "skillProficiency": "athletics",
+    "startingItem": "signal_horn",
+    "blurb": "Six seasons on the salt roads. You have never lost a cargo. You have lost rather a lot of people, but nobody counts those in the ledger.",
+    "hubHook": "Otho Pell gives you ten percent off, grudgingly, every single time.",
+    "hubHookNpc": "otho",
+    "prologue": "pro_caravan_guard_1",
+    "abilities": [
+      {
+        "id": "road_discipline",
+        "level": 1
+      },
+      {
+        "id": "escort",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "staff": "Every company contract you ever signed forbade unlicensed fire within reach of a cargo. You signed a lot of them."
+    }
+  },
+  "scholar": {
+    "id": "scholar",
+    "name": "Disgraced Scholar",
+    "abilityBonus": {
+      "int": 1
+    },
+    "skillProficiency": "arcana",
+    "startingItem": "waterlogged_journal",
+    "blurb": "You were right. That was the problem. Being right in front of the wrong people is how a career ends and how a descent begins.",
+    "hubHook": "The Tallyman recognises your name and will not say from where.",
+    "hubHookNpc": "tallyman",
+    "prologue": "pro_scholar_1",
+    "abilities": [
+      {
+        "id": "read_the_room",
+        "level": 1
+      },
+      {
+        "id": "marginalia",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "warhammer": "You have never in your life swung anything heavier than an argument, and it shows immediately."
+    }
+  },
+  "gutter_rat": {
+    "id": "gutter_rat",
+    "name": "Gutter Rat",
+    "abilityBonus": {
+      "dex": 1
+    },
+    "skillProficiency": "stealth",
+    "startingItem": "bent_lockpicks",
+    "blurb": "Nobody taught you anything. You watched, and you took, and the ones who caught you taught you to be faster.",
+    "hubHook": "Vess Coldhand waives your first deposit fee. Once per account, and she will remind you of it.",
+    "hubHookNpc": "vess",
+    "prologue": "pro_gutter_rat_1",
+    "abilities": [
+      {
+        "id": "light_fingers",
+        "level": 1
+      },
+      {
+        "id": "slip",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "spear": "You cannot take a nine-foot pole through a second-storey window. You have tried."
+    }
+  },
+  "ferryman": {
+    "id": "ferryman",
+    "name": "Ferryman",
+    "abilityBonus": {
+      "wis": 1
+    },
+    "skillProficiency": "perception",
+    "startingItem": "coil_of_line",
+    "blurb": "Twenty years taking people across, and the fare was never the point. You learned to tell, from the way they sat, which ones were coming back.",
+    "hubHook": "The gate-wardens do not charge you the crossing toll. Nobody has ever said why.",
+    "hubHookNpc": "vess",
+    "prologue": "pro_ferryman_1",
+    "abilities": [
+      {
+        "id": "slack_water",
+        "level": 1
+      },
+      {
+        "id": "steady_crossing",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "warhammer": "Weight is the enemy on the water. Twenty years of trimming a load will not let you pick that up."
+    },
+    "locked": true,
+    "lockedNote": "The Last Crossing opens in a later chapter."
+  },
+  "debt_collector": {
+    "id": "debt_collector",
+    "name": "Debt Collector",
+    "abilityBonus": {
+      "cha": 1
+    },
+    "skillProficiency": "athletics",
+    "startingItem": "iron_ledger",
+    "blurb": "You were very good at it, which is a strange thing to be good at. You could always find the number a person would break at, and you never had to raise your voice.",
+    "hubHook": "The Tallyman greets you as a colleague, which is the single most frightening thing in Ashvault.",
+    "hubHookNpc": "tallyman",
+    "prologue": "pro_debt_collector_1",
+    "abilities": [
+      {
+        "id": "ledger",
+        "level": 1
+      },
+      {
+        "id": "call_in",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "longbow": "Collection is done at conversational distance. A bow says the conversation is over, and then there is nothing to collect."
+    },
+    "locked": true,
+    "lockedNote": "The Column opens in a later chapter."
+  },
+  "mine_child": {
+    "id": "mine_child",
+    "name": "Mine-Child",
+    "abilityBonus": {
+      "con": 1
+    },
+    "skillProficiency": "athletics",
+    "startingItem": "pit_lamp",
+    "blurb": "Born below the cut and worked there from six. Daylight is the thing you have never quite got used to, and none of this dark frightens you the way it frightens everyone else.",
+    "hubHook": "Otho Pell asks you, every time, whether the lower galleries are safe yet.",
+    "hubHookNpc": "otho",
+    "prologue": "pro_mine_child_1",
+    "abilities": [
+      {
+        "id": "dark_adapted",
+        "level": 1
+      },
+      {
+        "id": "deep_lungs",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "longbow": "There is no gallery below the cut long enough to loose in. You would not know where to stand."
+    },
+    "locked": true,
+    "lockedNote": "Below the Cut opens in a later chapter."
+  },
+  "apostate": {
+    "id": "apostate",
+    "name": "Apostate",
+    "abilityBonus": {
+      "wis": 1
+    },
+    "skillProficiency": "arcana",
+    "startingItem": "broken_sigil",
+    "blurb": "You did not lose your faith. You put it down deliberately, in front of witnesses, and walked out while they were still deciding what to do about it.",
+    "hubHook": "Sister Ambril serves you first and does not meet your eye while she does it.",
+    "hubHookNpc": "ambril",
+    "prologue": "pro_apostate_1",
+    "abilities": [
+      {
+        "id": "unbound",
+        "level": 1
+      },
+      {
+        "id": "recant",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "lantern": "It was consecrated by people you walked out on, and it will not light for you. You did check.",
+      "censer": "You put that down in front of witnesses. Picking it back up is the one thing you will not do."
+    },
+    "locked": true,
+    "lockedNote": "The Recantation opens in a later chapter."
+  },
+  "fenwitch": {
+    "id": "fenwitch",
+    "name": "Fenwitch",
+    "abilityBonus": {
+      "int": 1
+    },
+    "skillProficiency": "perception",
+    "startingItem": "bundle_of_reeds",
+    "blurb": "Hedge-work, marsh-work, the kind of knowing that gets passed between women over a table and never written down. It is not respectable and it has never once failed you.",
+    "hubHook": "Kesh will not gamble with you and laughs when asked why.",
+    "hubHookNpc": "kesh",
+    "prologue": "pro_fenwitch_1",
+    "abilities": [
+      {
+        "id": "hedge_craft",
+        "level": 1
+      },
+      {
+        "id": "second_sight",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "censer": "Church iron, and the church keeps a list. Carrying it would tell them exactly where you are."
+    },
+    "locked": true,
+    "lockedNote": "The Hedge opens in a later chapter."
+  },
+  "deserter": {
+    "id": "deserter",
+    "name": "Deserter",
+    "abilityBonus": {
+      "dex": 1
+    },
+    "skillProficiency": "stealth",
+    "startingItem": "cut_colours",
+    "blurb": "You put the standard down in the mud and walked, and the walking has not really stopped since. You still cannot say whether it was cowardice.",
+    "hubHook": "Vess Coldhand knew your company. She does not say from which side.",
+    "hubHookNpc": "vess",
+    "prologue": "pro_deserter_1",
+    "abilities": [
+      {
+        "id": "learned_to_run",
+        "level": 1
+      },
+      {
+        "id": "survivors_instinct",
+        "level": 2
+      }
+    ],
+    "forbids": {
+      "spear": "You left your pike upright in the mud with the standard. Whatever else you pick up, it will not be that."
+    },
+    "locked": true,
+    "lockedNote": "The Colours opens in a later chapter."
+  }
+}

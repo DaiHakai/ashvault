@@ -1,0 +1,356 @@
+{
+  "_comment": "Shared ability pool. Weapons and backgrounds both reference these by id, so adding either costs no combat code — combat.js dispatches on the id. Abilities with track 'weapon' are the active things you press in a fight; abilities with track 'background' are passives and world effects, and each declares a `hook` that the engine consults in exactly one place. Keeping the two tracks split is what lets 9 weapons x 10 backgrounds be 90 distinct kits without the combat surface doubling.",
+  "riposte": {
+    "id": "riposte",
+    "name": "Riposte",
+    "type": "reaction",
+    "uses": "encounter",
+    "auto": true,
+    "text": "Once per encounter, when an enemy misses you, make an immediate attack against it."
+  },
+  "second_wind": {
+    "id": "second_wind",
+    "name": "Second Wind",
+    "type": "bonus",
+    "uses": "rest",
+    "heal": "1d10",
+    "text": "Bonus action. Heal 1d10 + your level. Once per rest."
+  },
+  "cleave": {
+    "id": "cleave",
+    "name": "Cleave",
+    "type": "passive",
+    "auto": true,
+    "text": "When you reduce an enemy to 0 HP, immediately attack another enemy in the room."
+  },
+  "bulwark": {
+    "id": "bulwark",
+    "name": "Bulwark",
+    "type": "action",
+    "uses": "unlimited",
+    "acBonus": 4,
+    "text": "Action. Plant yourself. +4 AC until your next turn."
+  },
+  "mark": {
+    "id": "mark",
+    "name": "Mark",
+    "type": "free",
+    "uses": "unlimited",
+    "targets": "enemy",
+    "text": "Free action. Mark one enemy — your attacks against it have advantage until it dies or you mark another."
+  },
+  "fade": {
+    "id": "fade",
+    "name": "Fade",
+    "type": "action",
+    "uses": "unlimited",
+    "dc": 13,
+    "checkAbility": "dex",
+    "text": "Action. DC 13 DEX check to vanish. While hidden your next attack deals +2d6. Attacking breaks it."
+  },
+  "trapsense": {
+    "id": "trapsense",
+    "name": "Trapsense",
+    "type": "passive",
+    "auto": true,
+    "text": "You automatically detect hazards before they trigger. Searches for concealed dangers succeed without a roll."
+  },
+  "cinderbolt": {
+    "id": "cinderbolt",
+    "name": "Cinderbolt",
+    "type": "action",
+    "cost": 1,
+    "targets": "enemy",
+    "attack": true,
+    "range": "ranged",
+    "damage": "2d6",
+    "damageType": "fire",
+    "burn": "1d6",
+    "burnRounds": 2,
+    "text": "1 charge. Ranged attack for 2d6 + your casting modifier in fire. On a crit the target burns for 1d6 at the start of each of its next two turns."
+  },
+  "emberwall": {
+    "id": "emberwall",
+    "name": "Emberwall",
+    "type": "action",
+    "cost": 2,
+    "targets": "self",
+    "acBonus": 2,
+    "text": "2 charges. You and your allies gain +2 AC until your next turn."
+  },
+  "detonate": {
+    "id": "detonate",
+    "name": "Detonate",
+    "type": "action",
+    "cost": 3,
+    "targets": "all",
+    "damage": "3d6",
+    "damageType": "fire",
+    "saveAbility": "dex",
+    "saveForHalf": true,
+    "text": "3 charges. 3d6 to every enemy in the room, DEX save for half. It hits your allies too."
+  },
+  "kindle": {
+    "id": "kindle",
+    "name": "Kindle",
+    "type": "action",
+    "cost": 1,
+    "targets": "self",
+    "heal": "1d8",
+    "healAbility": "wis",
+    "text": "1 charge. Action. Heal an ally or yourself for 1d8 + your WIS modifier."
+  },
+  "warding_light": {
+    "id": "warding_light",
+    "name": "Warding Light",
+    "type": "action",
+    "cost": 1,
+    "targets": "self",
+    "grantsSaveAdvantage": true,
+    "text": "1 charge. One ally gains advantage on their next saving throw."
+  },
+  "last_breath": {
+    "id": "last_breath",
+    "name": "Last Breath",
+    "type": "reaction",
+    "cost": 3,
+    "targets": "ally",
+    "uses": "lifetime",
+    "selfForbidden": true,
+    "text": "3 charges. When an ally would die, they drop to 1 HP instead. Never yourself. Once per character lifetime — not per rest. Lifetime."
+  },
+  "unflinching": {
+    "id": "unflinching",
+    "track": "background",
+    "hook": "saveAdvantage:con",
+    "name": "Unflinching",
+    "type": "passive",
+    "auto": true,
+    "text": "You have seen worse, and closer. Advantage on every CON saving throw."
+  },
+  "deadweight": {
+    "id": "deadweight",
+    "track": "background",
+    "hook": "damageVsWounded",
+    "name": "Deadweight",
+    "type": "passive",
+    "auto": true,
+    "amount": 2,
+    "text": "You know exactly how much a body weighs. +2 damage against anything already below half health."
+  },
+  "road_discipline": {
+    "id": "road_discipline",
+    "track": "background",
+    "hook": "initiative",
+    "name": "Road Discipline",
+    "type": "passive",
+    "auto": true,
+    "amount": 3,
+    "text": "Six seasons of being woken badly. +3 initiative."
+  },
+  "escort": {
+    "id": "escort",
+    "track": "background",
+    "hook": "halveOneHit",
+    "name": "Escort",
+    "type": "passive",
+    "auto": true,
+    "uses": "encounter",
+    "text": "Once per encounter, the first hit that lands on you deals half damage. You have been standing in front of things for years."
+  },
+  "read_the_room": {
+    "id": "read_the_room",
+    "track": "background",
+    "hook": "revealTraits",
+    "name": "Read the Room",
+    "type": "passive",
+    "auto": true,
+    "text": "You are named on the paper of half the monographs down here. Enemy traits, resistances and phase mechanics are spelled out to you on sight."
+  },
+  "marginalia": {
+    "id": "marginalia",
+    "track": "background",
+    "hook": "nextRollAdvantage",
+    "name": "Marginalia",
+    "type": "command",
+    "uses": "dungeon",
+    "command": "foresee",
+    "text": "Once per run, FORESEE — somebody wrote this part down. Your next attack, check or saving throw is made with advantage."
+  },
+  "light_fingers": {
+    "id": "light_fingers",
+    "track": "background",
+    "hook": "searchBonus",
+    "name": "Light Fingers",
+    "type": "passive",
+    "auto": true,
+    "text": "Nothing you search comes up empty, and the purses are always fatter than they looked."
+  },
+  "slip": {
+    "id": "slip",
+    "track": "background",
+    "hook": "freeFlee",
+    "name": "Slip",
+    "type": "passive",
+    "auto": true,
+    "uses": "encounter",
+    "text": "Once per encounter your first attempt to FLEE succeeds without a roll. You have been leaving rooms like this your whole life."
+  },
+  "slack_water": {
+    "id": "slack_water",
+    "track": "background",
+    "hook": "ignoreWater",
+    "name": "Slack Water",
+    "type": "passive",
+    "auto": true,
+    "text": "Twenty years of reading it. Water never hinders you — no flee penalty, and the flood never fouls your swing."
+  },
+  "steady_crossing": {
+    "id": "steady_crossing",
+    "track": "background",
+    "hook": "saveAdvantage:str",
+    "name": "Steady Crossing",
+    "type": "passive",
+    "auto": true,
+    "text": "You have kept your feet on worse footing than this. Advantage on every STR saving throw."
+  },
+  "ledger": {
+    "id": "ledger",
+    "track": "background",
+    "hook": "marksMultiplier",
+    "name": "Ledger",
+    "type": "passive",
+    "auto": true,
+    "amount": 1.5,
+    "text": "You have never once been short-changed. All marks you find are increased by half."
+  },
+  "call_in": {
+    "id": "call_in",
+    "track": "background",
+    "hook": "nextHitBonus",
+    "name": "Call It In",
+    "type": "action",
+    "uses": "encounter",
+    "targets": "enemy",
+    "damage": "1d6",
+    "text": "Action, once per encounter. Name a debt. Your next hit on that target deals an extra 1d6."
+  },
+  "dark_adapted": {
+    "id": "dark_adapted",
+    "track": "background",
+    "hook": "acBonus",
+    "name": "Dark-Adapted",
+    "type": "passive",
+    "auto": true,
+    "amount": 1,
+    "text": "Born below the cut. None of this dark is dark to you. +1 AC."
+  },
+  "deep_lungs": {
+    "id": "deep_lungs",
+    "track": "background",
+    "hook": "halveMaxHpDrain",
+    "name": "Deep Lungs",
+    "type": "passive",
+    "auto": true,
+    "text": "Bad air was your whole childhood. The Drowning Song takes half as much of you as it should."
+  },
+  "unbound": {
+    "id": "unbound",
+    "track": "background",
+    "hook": "resourceBonus",
+    "name": "Unbound",
+    "type": "passive",
+    "auto": true,
+    "amount": 2,
+    "text": "Nothing is holding the lid down any more. +2 to your maximum charges."
+  },
+  "recant": {
+    "id": "recant",
+    "track": "background",
+    "hook": "restoreResource",
+    "uses": "dungeon",
+    "name": "Recant",
+    "type": "command",
+    "command": "recant",
+    "text": "Once per run, RECANT to refill your charges. It costs you something you would rather not name."
+  },
+  "hedge_craft": {
+    "id": "hedge_craft",
+    "track": "background",
+    "hook": "immunePoison",
+    "name": "Hedge-Craft",
+    "type": "passive",
+    "auto": true,
+    "text": "You knew which caps were wrong before you could read. Poison does nothing to you at all."
+  },
+  "second_sight": {
+    "id": "second_sight",
+    "track": "background",
+    "hook": "skillAdvantage:perception",
+    "name": "Second Sight",
+    "type": "passive",
+    "auto": true,
+    "text": "Advantage on every Perception check. You have always seen a little more than was strictly there."
+  },
+  "learned_to_run": {
+    "id": "learned_to_run",
+    "track": "background",
+    "hook": "fleeBonus",
+    "name": "Learned to Run",
+    "type": "passive",
+    "auto": true,
+    "amount": 4,
+    "text": "+4 on every attempt to FLEE. It is the one thing you are indisputably good at."
+  },
+  "survivors_instinct": {
+    "id": "survivors_instinct",
+    "track": "background",
+    "hook": "firstAttackDisadvantage",
+    "name": "Survivor's Instinct",
+    "type": "passive",
+    "auto": true,
+    "uses": "encounter",
+    "text": "The first attack against you each encounter has disadvantage. You were already moving."
+  },
+  "raise_thrall": {
+    "id": "raise_thrall",
+    "track": "weapon",
+    "name": "Raise Thrall",
+    "type": "action",
+    "cost": 1,
+    "targets": "corpse",
+    "text": "1 Vitae. Raise a body. You bring one down with you, and after that the fight provides. While it stands, everything in the room goes for it instead of you.",
+    "carried": {
+      "name": "Carrion Servant",
+      "hpBase": 8,
+      "hpPerLevel": 3,
+      "ac": 11,
+      "attackBase": 2,
+      "attackPerLevel": 1,
+      "damage": "1d6"
+    }
+  },
+  "siphon": {
+    "id": "siphon",
+    "track": "weapon",
+    "name": "Siphon",
+    "type": "action",
+    "cost": 1,
+    "targets": "enemy",
+    "attack": true,
+    "range": "ranged",
+    "damage": "1d8",
+    "damageType": "necrotic",
+    "siphonHalf": true,
+    "text": "1 Vitae. Ranged attack for 1d8 necrotic, and you heal for half of what it deals. The Warden does this to you later. Now you know how it feels."
+  },
+  "second_death": {
+    "id": "second_death",
+    "track": "weapon",
+    "name": "Second Death",
+    "type": "passive",
+    "auto": true,
+    "damage": "2d6",
+    "text": "When your Thrall falls, it comes apart for 2d6 across every enemy in the room. Nothing you raise dies quietly."
+  }
+}

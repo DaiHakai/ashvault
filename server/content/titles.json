@@ -1,0 +1,403 @@
+{
+  "_comment": "One hand-written name per weapon x background pair (GAME_DESIGN §3.2). This replaces the old prefix+noun generator, which produced 90 rows that read as only 10 families — every Gutter Rat was Gutter-something. A generated name tells the player which bucket they picked; a written one tells them who they are. Keyed weapon:background. All 90 exist, including the pairs currently forbidden, so lifting a prohibition never leaves a hole.",
+  "longsword:gravedigger": {
+    "title": "Sexton",
+    "gloss": "Keeper of the ground and everything set into it."
+  },
+  "longsword:caravan_guard": {
+    "title": "Doorward",
+    "gloss": "You held one. It is the whole of your career."
+  },
+  "longsword:scholar": {
+    "title": "Duellist",
+    "gloss": "Fencing was the only faculty that would still have you."
+  },
+  "longsword:gutter_rat": {
+    "title": "Bravo",
+    "gloss": "A sword for hire, and the hire was never much."
+  },
+  "longsword:ferryman": {
+    "title": "Tidesworn",
+    "gloss": "You swore it on moving water, which does not hold oaths well."
+  },
+  "longsword:debt_collector": {
+    "title": "Enforcer",
+    "gloss": "The blade was rarely necessary. That was rather the point of it."
+  },
+  "longsword:mine_child": {
+    "title": "Pitguard",
+    "gloss": "Somebody has to stand at the top of the shaft."
+  },
+  "longsword:apostate": {
+    "title": "Recreant",
+    "gloss": "A knight who yielded, and said why, and was not forgiven for the saying."
+  },
+  "longsword:fenwitch": {
+    "title": "Marshwarden",
+    "gloss": "The fen has borders. You are what stands on them."
+  },
+  "longsword:deserter": {
+    "title": "Oathbreaker",
+    "gloss": "You have stopped arguing with the word."
+  },
+  "warhammer:gravedigger": {
+    "title": "Barrowbreaker",
+    "gloss": "Some of them have to be opened. You are who they send."
+  },
+  "warhammer:caravan_guard": {
+    "title": "Bulwark",
+    "gloss": "Not a fighter. A wall that eats."
+  },
+  "warhammer:scholar": {
+    "title": "Iconoclast",
+    "gloss": "You broke the images, and you could cite why."
+  },
+  "warhammer:gutter_rat": {
+    "title": "Bruiser",
+    "gloss": "No technique whatsoever and a perfect record."
+  },
+  "warhammer:ferryman": {
+    "title": "Anchorhand",
+    "gloss": "You have swung heavier than this off a moving deck."
+  },
+  "warhammer:debt_collector": {
+    "title": "Legbreaker",
+    "gloss": "The oldest instrument of credit in the city."
+  },
+  "warhammer:mine_child": {
+    "title": "Hewer",
+    "gloss": "A trade name, not a fighting one. It transferred."
+  },
+  "warhammer:apostate": {
+    "title": "Templebreaker",
+    "gloss": "You did not leave quietly and you did not leave it standing."
+  },
+  "warhammer:fenwitch": {
+    "title": "Cairnsmith",
+    "gloss": "You built the stones that keep things in. You know where they are weak."
+  },
+  "warhammer:deserter": {
+    "title": "Mutineer",
+    "gloss": "You did not run first. You just ran loudest."
+  },
+  "spear:gravedigger": {
+    "title": "Pallguard",
+    "gloss": "You walk beside the box and you carry something with a point on it."
+  },
+  "spear:caravan_guard": {
+    "title": "Outrider",
+    "gloss": "Two miles ahead of the wagons, alone, for six seasons."
+  },
+  "spear:scholar": {
+    "title": "Phalangist",
+    "gloss": "You read how it was done and then went and did it."
+  },
+  "spear:gutter_rat": {
+    "title": "Gaffer",
+    "gloss": "A boat hook, filed. It reaches further than anyone expects."
+  },
+  "spear:ferryman": {
+    "title": "Poleman",
+    "gloss": "Twenty years pushing off the bottom. The reach is instinct."
+  },
+  "spear:debt_collector": {
+    "title": "Distrainer",
+    "gloss": "Licensed to seize goods, and to keep a distance while seizing them."
+  },
+  "spear:mine_child": {
+    "title": "Timberman",
+    "gloss": "You set the props that stop the roof. You know what holds."
+  },
+  "spear:apostate": {
+    "title": "Reaver",
+    "gloss": "There is no order left to be a spear for. There is still the spear."
+  },
+  "spear:fenwitch": {
+    "title": "Rushcutter",
+    "gloss": "Waist-deep work, done with a long blade on a long handle."
+  },
+  "spear:deserter": {
+    "title": "Skirmisher",
+    "gloss": "Never in the line. Always on the edge of it, already facing back."
+  },
+  "longbow:gravedigger": {
+    "title": "Yewman",
+    "gloss": "The churchyard grows the wood. You always knew what it was for."
+  },
+  "longbow:caravan_guard": {
+    "title": "Sentinel",
+    "gloss": "High on the load, watching the treeline, for years."
+  },
+  "longbow:scholar": {
+    "title": "Ballistician",
+    "gloss": "You can derive the arc. It has never once helped you loose faster."
+  },
+  "longbow:gutter_rat": {
+    "title": "Roofrunner",
+    "gloss": "Nobody looks up. You built a career on nobody looking up."
+  },
+  "longbow:ferryman": {
+    "title": "Farbank",
+    "gloss": "You have been judging that distance your entire life."
+  },
+  "longbow:debt_collector": {
+    "title": "Reckoner",
+    "gloss": "The account is settled at whatever range you decide it is."
+  },
+  "longbow:mine_child": {
+    "title": "Darkshot",
+    "gloss": "You do not need to see it. You need to hear it once."
+  },
+  "longbow:apostate": {
+    "title": "Excommunicate",
+    "gloss": "Cast out, and left with the one skill they did not think to take."
+  },
+  "longbow:fenwitch": {
+    "title": "Fowler",
+    "gloss": "Marsh birds, at dusk, on the wing. Everything else is easier."
+  },
+  "longbow:deserter": {
+    "title": "Longshot",
+    "gloss": "You have only ever shot at things that were coming for you."
+  },
+  "daggers:gravedigger": {
+    "title": "Shroudcutter",
+    "gloss": "Someone opens the cloth. It has always been you."
+  },
+  "daggers:caravan_guard": {
+    "title": "Bodyguard",
+    "gloss": "Close work, in a crowd, without anybody noticing it happened."
+  },
+  "daggers:scholar": {
+    "title": "Vivisector",
+    "gloss": "You wanted to know how it worked while it still did."
+  },
+  "daggers:gutter_rat": {
+    "title": "Shiv",
+    "gloss": "Not what you carry. What they call you."
+  },
+  "daggers:ferryman": {
+    "title": "Linecutter",
+    "gloss": "One stroke, and whatever was tied to you is not."
+  },
+  "daggers:debt_collector": {
+    "title": "Clipper",
+    "gloss": "You took a little off the edge of everything that passed through."
+  },
+  "daggers:mine_child": {
+    "title": "Narrowman",
+    "gloss": "You fit where nobody grown can, and you arrive with both hands full."
+  },
+  "daggers:apostate": {
+    "title": "Defiler",
+    "gloss": "You were told what the word meant. You went and earned it."
+  },
+  "daggers:fenwitch": {
+    "title": "Thornhand",
+    "gloss": "Everything in the hedge is sharp. You are only the newest part of it."
+  },
+  "daggers:deserter": {
+    "title": "Turncoat",
+    "gloss": "The knife you kept was the officer's. Nobody has ever asked."
+  },
+  "staff:gravedigger": {
+    "title": "Wakekeeper",
+    "gloss": "You sat up with them. Something sat up with you."
+  },
+  "staff:caravan_guard": {
+    "title": "Warder",
+    "gloss": "You learned it to keep the wagons whole, which it did, mostly."
+  },
+  "staff:scholar": {
+    "title": "Magus",
+    "gloss": "The title they stripped from you. You have kept using it."
+  },
+  "staff:gutter_rat": {
+    "title": "Trickster",
+    "gloss": "Half of it is real. You have stopped keeping track of which half."
+  },
+  "staff:ferryman": {
+    "title": "Riverwright",
+    "gloss": "You did not learn this. The crossing taught you, slowly, without asking."
+  },
+  "staff:debt_collector": {
+    "title": "Bindsman",
+    "gloss": "Binding is binding, whether it is written or spoken."
+  },
+  "staff:mine_child": {
+    "title": "Delver",
+    "gloss": "Down is a direction you have never been frightened of."
+  },
+  "staff:apostate": {
+    "title": "Heresiarch",
+    "gloss": "You did not merely leave. You took people with you."
+  },
+  "staff:fenwitch": {
+    "title": "Hedgewitch",
+    "gloss": "Passed across a table, never written down, never once failed you."
+  },
+  "staff:deserter": {
+    "title": "Vagrant",
+    "gloss": "The walking did not stop, and somewhere in it you picked this up."
+  },
+  "tome:gravedigger": {
+    "title": "Obituarist",
+    "gloss": "You wrote the register. You noticed which names came back."
+  },
+  "tome:caravan_guard": {
+    "title": "Chronicler",
+    "gloss": "Somebody kept the road log. It turned out to matter."
+  },
+  "tome:scholar": {
+    "title": "Archivist",
+    "gloss": "You were right, in writing, in front of the wrong people."
+  },
+  "tome:gutter_rat": {
+    "title": "Forger",
+    "gloss": "You cannot read half of it. You can copy all of it."
+  },
+  "tome:ferryman": {
+    "title": "Logkeeper",
+    "gloss": "Every fare, every crossing, every one that did not come back."
+  },
+  "tome:debt_collector": {
+    "title": "Ledgerbound",
+    "gloss": "The book stopped being a record somewhere around the fourth column."
+  },
+  "tome:mine_child": {
+    "title": "Seamreader",
+    "gloss": "You read rock before you read letters and you read it better."
+  },
+  "tome:apostate": {
+    "title": "Apocryphon",
+    "gloss": "The text they would not canonise. You have it by heart."
+  },
+  "tome:fenwitch": {
+    "title": "Charmwright",
+    "gloss": "Written down at last, against every instruction you were given."
+  },
+  "tome:deserter": {
+    "title": "Redactor",
+    "gloss": "You have been striking your own name out of things for years."
+  },
+  "lantern:gravedigger": {
+    "title": "Lychbearer",
+    "gloss": "The gate, the light, the long walk in. All of it yours."
+  },
+  "lantern:caravan_guard": {
+    "title": "Nightwatch",
+    "gloss": "Third bell to ninth, every night, for eleven years."
+  },
+  "lantern:scholar": {
+    "title": "Illuminator",
+    "gloss": "You lit manuscripts before you lit anything else."
+  },
+  "lantern:gutter_rat": {
+    "title": "Snuffer",
+    "gloss": "You learned the light so you would know exactly when to kill it."
+  },
+  "lantern:ferryman": {
+    "title": "Beaconman",
+    "gloss": "You were the thing on the bank that told people where the bank was."
+  },
+  "lantern:debt_collector": {
+    "title": "Herald",
+    "gloss": "You arrive lit, and announced, and that is most of the work done."
+  },
+  "lantern:mine_child": {
+    "title": "Lampwright",
+    "gloss": "Gauze, oil, and a flame that must never touch the air down there."
+  },
+  "lantern:apostate": {
+    "title": "Vigil",
+    "gloss": "You kept it after you stopped believing in what it was kept for."
+  },
+  "lantern:fenwitch": {
+    "title": "Wisp",
+    "gloss": "You spent your girlhood following them. Now something follows you."
+  },
+  "lantern:deserter": {
+    "title": "Watchbreaker",
+    "gloss": "You put the lamp down at your post and walked. It is still lit."
+  },
+  "censer:gravedigger": {
+    "title": "Thurifer",
+    "gloss": "You swung it at every graveside in the parish. It swings the same."
+  },
+  "censer:caravan_guard": {
+    "title": "Smokeward",
+    "gloss": "Keeps the flies off the meat and other things off the wagons."
+  },
+  "censer:scholar": {
+    "title": "Liturgist",
+    "gloss": "You studied the rite. You never expected to need it to work."
+  },
+  "censer:gutter_rat": {
+    "title": "Ashthief",
+    "gloss": "You stole it from a chapel and it has not stopped burning since."
+  },
+  "censer:ferryman": {
+    "title": "Mistbringer",
+    "gloss": "The river does this on its own. You have learned to ask it to."
+  },
+  "censer:debt_collector": {
+    "title": "Absolver",
+    "gloss": "You are the only man in the city who can clear a debt permanently."
+  },
+  "censer:mine_child": {
+    "title": "Blackdamp",
+    "gloss": "Named for the gas that kills quietly. You were named for it young."
+  },
+  "censer:apostate": {
+    "title": "Defrocked",
+    "gloss": "They took the vestments. Nobody thought to take this."
+  },
+  "censer:fenwitch": {
+    "title": "Miasmist",
+    "gloss": "The fen breathes out. You have simply learned to aim it."
+  },
+  "censer:deserter": {
+    "title": "Penitent",
+    "gloss": "You carry it because putting it down once was enough."
+  },
+  "gravebell:gravedigger": {
+    "title": "Knell",
+    "gloss": "You rang them down for twelve years. Ringing one back up is the same motion performed with a different intention."
+  },
+  "gravebell:caravan_guard": {
+    "title": "Tollman",
+    "gloss": "Every road has a toll and you spent six seasons collecting it in the only currency that matters. Now you are collecting arrears."
+  },
+  "gravebell:scholar": {
+    "title": "Necrologist",
+    "gloss": "The monograph was going to be called On the Persistence of the Animate. The committee never read past the title and, in fairness, neither did you."
+  },
+  "gravebell:gutter_rat": {
+    "title": "Bodysnatcher",
+    "gloss": "Nobody taught you that a corpse is just unattended property. You worked it out on your own, the way you worked out everything."
+  },
+  "gravebell:ferryman": {
+    "title": "Drowner",
+    "gloss": "You took them across for twenty years and never once asked what was owed on the far side. Now you are asking, and they are answering."
+  },
+  "gravebell:debt_collector": {
+    "title": "Repossessor",
+    "gloss": "Death does not discharge a debt. It only moves the conversation somewhere less convenient, and you have never minded the walk."
+  },
+  "gravebell:mine_child": {
+    "title": "Deadfall",
+    "gloss": "The gallery took forty men in one afternoon and the company wrote it off in an hour. You have been ringing for them ever since."
+  },
+  "gravebell:apostate": {
+    "title": "Anathema",
+    "gloss": "They read you out of the order by name, in front of witnesses, with the bell. You kept the bell."
+  },
+  "gravebell:fenwitch": {
+    "title": "Bonewife",
+    "gloss": "Hedge-work does not stop at the churchyard wall. It never did. That is the part they always found objectionable."
+  },
+  "gravebell:deserter": {
+    "title": "Revenant",
+    "gloss": "You walked away from the standard and the standard has been walking after you ever since, and it has brought the whole company with it."
+  }
+}

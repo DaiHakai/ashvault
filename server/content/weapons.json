@@ -1,0 +1,577 @@
+{
+  "_comment": "Weapons replace classes (GAME_DESIGN §2). The weapon you take up is your discipline: it decides how you fight, what you can wear, and what you learn. Crossed with a background it produces your title, which is hand-written per pair in titles.json — see GAME_DESIGN §3.2.",
+  "longsword": {
+    "id": "longsword",
+    "name": "Longsword",
+    "figure": "armoured",
+    "tagline": "for the one who stands in the doorway",
+    "blurb": "Good steel and the stubbornness to stay where you were put. It asks for strength and it asks you not to move.",
+    "hitDie": 10,
+    "primary": "str",
+    "abilityBonus": {
+      "str": 2,
+      "con": 1
+    },
+    "damage": "1d8",
+    "range": "melee",
+    "saveProficiencies": [
+      "str",
+      "con"
+    ],
+    "armour": {
+      "name": "Chain",
+      "base": 16,
+      "dexBonus": false,
+      "dexMax": 0
+    },
+    "marks": 20,
+    "resource": null,
+    "kit": [
+      {
+        "item": "longsword",
+        "equip": "weapon"
+      },
+      {
+        "item": "shield",
+        "equip": "offhand"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "riposte",
+        "level": 1
+      },
+      {
+        "id": "second_wind",
+        "level": 2
+      },
+      {
+        "id": "cleave",
+        "level": 3
+      }
+    ]
+  },
+  "warhammer": {
+    "id": "warhammer",
+    "name": "Warhammer",
+    "figure": "armoured",
+    "tagline": "for the one who gets through the door",
+    "blurb": "A weight on a haft, honest about what it is for. Slower to swing and much harder to argue with.",
+    "hitDie": 10,
+    "primary": "str",
+    "abilityBonus": {
+      "str": 2,
+      "con": 1
+    },
+    "damage": "1d10",
+    "range": "melee",
+    "saveProficiencies": [
+      "str",
+      "con"
+    ],
+    "armour": {
+      "name": "Chain",
+      "base": 16,
+      "dexBonus": false,
+      "dexMax": 0
+    },
+    "marks": 18,
+    "resource": null,
+    "kit": [
+      {
+        "item": "warhammer",
+        "equip": "weapon"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bulwark",
+        "level": 1
+      },
+      {
+        "id": "second_wind",
+        "level": 2
+      },
+      {
+        "id": "cleave",
+        "level": 3
+      }
+    ]
+  },
+  "spear": {
+    "id": "spear",
+    "name": "Spear",
+    "figure": "armoured",
+    "tagline": "for the one who keeps things at arm's length",
+    "blurb": "The oldest answer to the oldest problem. Reach, and the discipline to hold the line rather than close it.",
+    "hitDie": 8,
+    "primary": "str",
+    "abilityBonus": {
+      "str": 2,
+      "dex": 1
+    },
+    "damage": "1d8",
+    "range": "melee",
+    "saveProficiencies": [
+      "str",
+      "dex"
+    ],
+    "armour": {
+      "name": "Scale",
+      "base": 14,
+      "dexBonus": true,
+      "dexMax": 2
+    },
+    "marks": 20,
+    "resource": null,
+    "kit": [
+      {
+        "item": "spear",
+        "equip": "weapon"
+      },
+      {
+        "item": "shield",
+        "equip": "offhand"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "riposte",
+        "level": 1
+      },
+      {
+        "id": "bulwark",
+        "level": 2
+      },
+      {
+        "id": "cleave",
+        "level": 3
+      }
+    ]
+  },
+  "longbow": {
+    "id": "longbow",
+    "name": "Longbow",
+    "figure": "hooded",
+    "tagline": "for the one who was never there",
+    "blurb": "Horn and sinew, and the patience to want the shot more than you want the moment.",
+    "hitDie": 8,
+    "primary": "dex",
+    "abilityBonus": {
+      "dex": 2,
+      "wis": 1
+    },
+    "damage": "1d6",
+    "range": "ranged",
+    "saveProficiencies": [
+      "dex",
+      "wis"
+    ],
+    "armour": {
+      "name": "Studded Leather",
+      "base": 12,
+      "dexBonus": true,
+      "dexMax": null
+    },
+    "marks": 25,
+    "resource": null,
+    "kit": [
+      {
+        "item": "shortbow",
+        "equip": "weapon"
+      },
+      {
+        "item": "dagger"
+      },
+      {
+        "item": "rope"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "mark",
+        "level": 1
+      },
+      {
+        "id": "fade",
+        "level": 2
+      },
+      {
+        "id": "trapsense",
+        "level": 3
+      }
+    ]
+  },
+  "daggers": {
+    "id": "daggers",
+    "name": "Paired Daggers",
+    "figure": "hooded",
+    "tagline": "for the one who is already behind you",
+    "blurb": "Two short answers. Everything about them assumes you got close without being noticed, because otherwise they are not much use.",
+    "hitDie": 8,
+    "primary": "dex",
+    "abilityBonus": {
+      "dex": 2,
+      "cha": 1
+    },
+    "damage": "1d6",
+    "range": "melee",
+    "saveProficiencies": [
+      "dex",
+      "cha"
+    ],
+    "armour": {
+      "name": "Studded Leather",
+      "base": 12,
+      "dexBonus": true,
+      "dexMax": null
+    },
+    "marks": 25,
+    "resource": null,
+    "kit": [
+      {
+        "item": "dagger",
+        "equip": "weapon"
+      },
+      {
+        "item": "dagger"
+      },
+      {
+        "item": "bent_lockpicks"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "fade",
+        "level": 1
+      },
+      {
+        "id": "mark",
+        "level": 2
+      },
+      {
+        "id": "cleave",
+        "level": 3
+      }
+    ]
+  },
+  "staff": {
+    "id": "staff",
+    "name": "Staff",
+    "figure": "robed",
+    "tagline": "for the one who spends themself",
+    "blurb": "A length of blackened wood that is always slightly warmer than the room. The fire is not a tool you picked up — it is a debt you are servicing.",
+    "hitDie": 6,
+    "primary": "int",
+    "abilityBonus": {
+      "int": 2,
+      "con": 1
+    },
+    "damage": "1d8",
+    "range": "ranged",
+    "saveProficiencies": [
+      "int",
+      "cha"
+    ],
+    "armour": {
+      "name": "Warded Robes",
+      "base": 13,
+      "dexBonus": true,
+      "dexMax": null
+    },
+    "marks": 15,
+    "resource": {
+      "id": "embers",
+      "name": "Embers",
+      "ability": "int"
+    },
+    "kit": [
+      {
+        "item": "focus_rod",
+        "equip": "weapon"
+      },
+      {
+        "item": "dagger"
+      },
+      {
+        "item": "spellbook"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "cinderbolt",
+        "level": 1
+      },
+      {
+        "id": "emberwall",
+        "level": 2
+      },
+      {
+        "id": "detonate",
+        "level": 3
+      }
+    ]
+  },
+  "tome": {
+    "id": "tome",
+    "name": "Bound Tome",
+    "figure": "robed",
+    "tagline": "for the one who read too far",
+    "blurb": "Somebody wrote all of this down, which was the first mistake. You went and read it, which was the second.",
+    "hitDie": 6,
+    "primary": "int",
+    "abilityBonus": {
+      "int": 2,
+      "wis": 1
+    },
+    "damage": "1d6",
+    "range": "ranged",
+    "saveProficiencies": [
+      "int",
+      "wis"
+    ],
+    "armour": {
+      "name": "Warded Robes",
+      "base": 13,
+      "dexBonus": true,
+      "dexMax": null
+    },
+    "marks": 20,
+    "resource": {
+      "id": "embers",
+      "name": "Embers",
+      "ability": "int"
+    },
+    "kit": [
+      {
+        "item": "bound_tome",
+        "equip": "weapon"
+      },
+      {
+        "item": "dagger"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "cinderbolt",
+        "level": 1
+      },
+      {
+        "id": "warding_light",
+        "level": 2
+      },
+      {
+        "id": "detonate",
+        "level": 3
+      }
+    ]
+  },
+  "lantern": {
+    "id": "lantern",
+    "name": "Warding Lantern",
+    "figure": "lantern",
+    "tagline": "for the one who decides who comes back",
+    "blurb": "Someone has to carry the light and someone has to decide where to point it. Both of those are the same terrible job.",
+    "hitDie": 8,
+    "primary": "wis",
+    "abilityBonus": {
+      "wis": 2,
+      "cha": 1
+    },
+    "damage": "1d8",
+    "range": "melee",
+    "saveProficiencies": [
+      "wis",
+      "cha"
+    ],
+    "armour": {
+      "name": "Scale",
+      "base": 14,
+      "dexBonus": true,
+      "dexMax": 2
+    },
+    "marks": 20,
+    "resource": {
+      "id": "oil",
+      "name": "Oil",
+      "ability": "wis"
+    },
+    "kit": [
+      {
+        "item": "warding_lantern",
+        "equip": "weapon"
+      },
+      {
+        "item": "mace"
+      },
+      {
+        "item": "holy_sigil"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "kindle",
+        "level": 1
+      },
+      {
+        "id": "warding_light",
+        "level": 2
+      },
+      {
+        "id": "last_breath",
+        "level": 3
+      }
+    ]
+  },
+  "censer": {
+    "id": "censer",
+    "name": "Chain Censer",
+    "figure": "lantern",
+    "tagline": "for the one who walks in front",
+    "blurb": "Smoke on a chain, swung to keep something at a distance. Nobody has ever fully explained what.",
+    "hitDie": 8,
+    "primary": "wis",
+    "abilityBonus": {
+      "wis": 2,
+      "con": 1
+    },
+    "damage": "1d6",
+    "range": "melee",
+    "saveProficiencies": [
+      "wis",
+      "con"
+    ],
+    "armour": {
+      "name": "Scale",
+      "base": 14,
+      "dexBonus": true,
+      "dexMax": 2
+    },
+    "marks": 20,
+    "resource": {
+      "id": "oil",
+      "name": "Oil",
+      "ability": "wis"
+    },
+    "kit": [
+      {
+        "item": "chain_censer",
+        "equip": "weapon"
+      },
+      {
+        "item": "holy_sigil"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "kindle",
+        "level": 1
+      },
+      {
+        "id": "emberwall",
+        "level": 2
+      },
+      {
+        "id": "last_breath",
+        "level": 3
+      }
+    ]
+  },
+  "gravebell": {
+    "id": "gravebell",
+    "name": "Grave-Bell",
+    "figure": "shrouded",
+    "tagline": "for the one who does not accept the answer",
+    "blurb": "Rung over the dead so they would settle. You worked out, eventually, that it goes the other way round just as well.",
+    "hitDie": 6,
+    "primary": "cha",
+    "abilityBonus": {
+      "cha": 2,
+      "con": 1
+    },
+    "damage": "1d8",
+    "range": "ranged",
+    "saveProficiencies": [
+      "cha",
+      "int"
+    ],
+    "armour": {
+      "name": "Grave-wrappings",
+      "base": 10,
+      "dexBonus": true,
+      "dexMax": null
+    },
+    "marks": 15,
+    "resource": {
+      "id": "vitae",
+      "name": "Vitae",
+      "ability": "cha"
+    },
+    "kit": [
+      {
+        "item": "gravebell",
+        "equip": "weapon"
+      },
+      {
+        "item": "dagger"
+      },
+      {
+        "item": "broken_sigil"
+      },
+      {
+        "item": "ration",
+        "qty": 3
+      }
+    ],
+    "abilities": [
+      {
+        "id": "raise_thrall",
+        "level": 1
+      },
+      {
+        "id": "siphon",
+        "level": 2
+      },
+      {
+        "id": "second_death",
+        "level": 3
+      }
+    ]
+  }
+}

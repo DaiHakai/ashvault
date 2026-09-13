@@ -14,7 +14,7 @@ export const COMMANDS = {
   equip: { verb: 'equip', aliases: ['wield', 'wear'], arg: 'required' },
   unequip: { verb: 'unequip', aliases: ['remove', 'stow'], arg: 'required' },
   use: { verb: 'use', aliases: ['drink', 'quaff', 'eat'], arg: 'required' },
-  search: { verb: 'search', aliases: ['loot', 'forage'], arg: 'none' },
+  search: { verb: 'search', aliases: ['loot', 'forage', 'investigate', 'investigation', 'rummage', 'scavenge'], arg: 'none' },
   rest: { verb: 'rest', aliases: ['sleep', 'pray'], arg: 'none' },
   climb: { verb: 'climb', aliases: ['mount'], arg: 'none' },
   descend: { verb: 'descend', aliases: ['dismount'], arg: 'none' },
@@ -47,6 +47,17 @@ const TARGET_SPLIT = new Set(['on', 'at', 'against']);
 
 const VERB_LOOKUP = buildVerbLookup();
 
+// A text adventure should understand intent, not make a player memorize a
+// command manual. These are deliberately narrow, consequence-safe rewrites:
+// they only choose SEARCH, which already decides whether a room has anything
+// to find and whether a check is appropriate. We never turn free prose into a
+// combat action or invent a target.
+const SEARCH_PHRASES = [
+  /^(?:roll|make|do|perform|try)(?: a| an| the)? (?:perception |investigation )?check(?: for .+)?$/,
+  /^(?:can i |i want to |let me )?(?:search|investigate|rummage|scavenge|loot)(?: .+)?$/,
+  /^(?:look|look around) for (?:loot|clues|anything|items?)(?: .+)?$/,
+];
+
 function buildVerbLookup() {
   const map = new Map();
   for (const cmd of Object.values(COMMANDS)) {
@@ -69,7 +80,8 @@ export function parse(input) {
     return { ok: false, reason: 'empty', message: 'Say something.', suggestion: null };
   }
 
-  const words = raw.toLowerCase().split(/\s+/);
+  const intent = normaliseIntent(raw);
+  const words = intent.toLowerCase().split(/\s+/);
   const head = words[0];
 
   // Bare direction: "north", "n"
@@ -120,6 +132,17 @@ export function parse(input) {
   }
 
   return { ok: true, verb, arg, target, raw };
+}
+
+/** Translate a few common spoken-style requests into their safe game verb. */
+export function normaliseIntent(raw) {
+  const cleaned = String(raw ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  return SEARCH_PHRASES.some((phrase) => phrase.test(cleaned)) ? 'search' : raw;
 }
 
 function missingArgMessage(verb) {
@@ -212,7 +235,7 @@ export function helpText() {
   return [
     'LOOK [thing]        study the room, or one thing in it        (L)',
     'MOVE <direction>    north / south / east / west / up / down   (N S E W U D)',
-    'SEARCH              turn the room over properly',
+    'SEARCH / INVESTIGATE / ROLL CHECK   turn the room over properly',
     'ATTACK [enemy]      strike — bare ATTACK picks the weakest    (A)',
     'ABILITY <name> [on <enemy>]   use what your class knows',
     'DEFEND              +2 AC until your next turn',

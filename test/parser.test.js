@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { parse, closestVerb, matchName, levenshtein } from '../server/parser.js';
+import { parse, closestVerb, matchName, levenshtein, normaliseIntent } from '../server/parser.js';
 
 test('canonical verbs and their aliases resolve to the same verb', () => {
   for (const input of ['look', 'l', 'examine', 'LOOK', '  Look  ']) {
@@ -27,6 +27,21 @@ test('filler words and articles are discarded', () => {
   assert.equal(parse('attack the bloatrat').arg, 'bloatrat');
   assert.equal(parse('use the health draught').arg, 'health draught');
   assert.equal(parse('look at the shrine').arg, 'shrine');
+});
+
+test('spoken investigation requests resolve to the safe SEARCH action', () => {
+  for (const input of [
+    'investigate item',
+    'investigate the room',
+    'roll check',
+    'roll a perception check',
+    'make an investigation check',
+    'can I search for clues?',
+    'look for loot',
+  ]) {
+    assert.equal(parse(input).verb, 'search', `failed on "${input}"`);
+  }
+  assert.equal(normaliseIntent('check inventory'), 'check inventory', 'unrelated checks remain untouched');
 });
 
 test('"<subject> on <target>" splits into arg and target', () => {

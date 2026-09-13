@@ -5,7 +5,7 @@
 
 import { randomUUID } from 'node:crypto';
 import { roll, rollDamage, rollDie, formatRoll } from './dice.js';
-import { getRoom, getItem, getWeapon, getBackground, startingRoomFor } from './content.js';
+import { getRoom, getItem, getWeapon, getBackground, startingRoomFor, weaponTutorialFor, combatProfileFor } from './content.js';
 import { parse, matchName, helpText, DIRECTIONS } from './parser.js';
 import { Encounter } from './combat.js';
 import {
@@ -153,6 +153,10 @@ export class GameSession {
     this.push('system', `${bgDef.name} · ${weaponDef.name}`);
     this.push('narration', bgDef.blurb);
     this.push('narration', weaponDef.blurb);
+    const tutorial = weaponTutorialFor(weaponId);
+    const profile = combatProfileFor(weaponId, backgroundId);
+    this.push('tutorial', `${tutorial.name.toUpperCase()} — ${tutorial.text}`);
+    this.push('system', `${profile.label} · ${profile.description}`);
     this.push(
       'system',
       `HP ${this.character.hp}/${this.character.hpMax} · AC ${armourClass(this.character)} · ${this.character.marks} marks`
@@ -866,6 +870,7 @@ export class GameSession {
       figure: weaponDef.figure,
       weaponName: weaponDef.name,
       backgroundName: bgDef.name,
+      combatProfile: combatProfileFor(c.weaponId, c.backgroundId),
       level: c.level,
       xp: c.xp,
       xpToNext: xpToNextLevel(c.xp),

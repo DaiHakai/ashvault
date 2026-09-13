@@ -218,3 +218,10 @@ The user supplied `DarkGlorydesign.md` (in Downloads) as an overhaul. It is a **
 - Fixed the creation-picker bug where a forbidden combination was only dimmed after choosing a background, and could still be clicked.
 - Prohibitions now lock both halves of a pair: choosing the **Spear** disables **Gutter Rat**; choosing **Gutter Rat** disables **Spear**. Every other authored refusal behaves the same way, with its in-fiction reason retained as the control description.
 - The server has always rejected those pairs; this makes the UI match the game rules. `npm test`: **102 passing**.
+
+## 2026-09-13 — weapon lessons and hybrid disciplines
+
+- Each weapon now gives a distinct first-lesson message at the beginning of a run. It teaches the signature level-one command while the background's existing two-room prologue remains the character's personal story introduction.
+- Added the first true hybrid rule: a **Scholar** paired with a melee weapon becomes an Intelligence-capable arcane melee discipline. The combat engine uses the stronger of the weapon's normal stat and INT for attack and damage — a Longsword Scholar is now genuinely a **Spellblade**, not just a renamed fighter.
+- Rewrote the other available Scholar melee titles to match the rule: **Runelancer**, **Hexknife**, **Lumen Knight**, and **Runethurifer**. The data model (`background.mystic`) makes later magical backgrounds straightforward to add without rewriting combat.
+- The character creator previews the actual attack-stat rule, and the character sheet carries the resulting discipline label.

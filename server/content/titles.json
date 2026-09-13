@@ -9,8 +9,8 @@
     "gloss": "You held one. It is the whole of your career."
   },
   "longsword:scholar": {
-    "title": "Duellist",
-    "gloss": "Fencing was the only faculty that would still have you."
+    "title": "Spellblade",
+    "gloss": "Fencing was the only faculty that would still have you. You made it arcane before they could throw you out."
   },
   "longsword:gutter_rat": {
     "title": "Bravo",
@@ -89,8 +89,8 @@
     "gloss": "Two miles ahead of the wagons, alone, for six seasons."
   },
   "spear:scholar": {
-    "title": "Phalangist",
-    "gloss": "You read how it was done and then went and did it."
+    "title": "Runelancer",
+    "gloss": "You read how it was done, carved the formula down the shaft, and then went and did it."
   },
   "spear:gutter_rat": {
     "title": "Gaffer",
@@ -169,8 +169,8 @@
     "gloss": "Close work, in a crowd, without anybody noticing it happened."
   },
   "daggers:scholar": {
-    "title": "Vivisector",
-    "gloss": "You wanted to know how it worked while it still did."
+    "title": "Hexknife",
+    "gloss": "You wanted to know how it worked while it still did. The answer fit neatly along a blade."
   },
   "daggers:gutter_rat": {
     "title": "Shiv",
@@ -289,8 +289,8 @@
     "gloss": "Third bell to ninth, every night, for eleven years."
   },
   "lantern:scholar": {
-    "title": "Illuminator",
-    "gloss": "You lit manuscripts before you lit anything else."
+    "title": "Lumen Knight",
+    "gloss": "You lit manuscripts before you lit anything else. Now the light answers when you lift a weapon with it."
   },
   "lantern:gutter_rat": {
     "title": "Snuffer",
@@ -329,8 +329,8 @@
     "gloss": "Keeps the flies off the meat and other things off the wagons."
   },
   "censer:scholar": {
-    "title": "Liturgist",
-    "gloss": "You studied the rite. You never expected to need it to work."
+    "title": "Runethurifer",
+    "gloss": "You studied the rite. You never expected the smoke to carry formulae, or for them to work."
   },
   "censer:gutter_rat": {
     "title": "Ashthief",

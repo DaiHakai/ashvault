@@ -59,6 +59,10 @@
       "int": 1
     },
     "skillProficiency": "arcana",
+    "mystic": {
+      "school": "arcane",
+      "ability": "int"
+    },
     "startingItem": "waterlogged_journal",
     "blurb": "You were right. That was the problem. Being right in front of the wrong people is how a career ends and how a descent begins.",
     "hubHook": "The Tallyman recognises your name and will not say from where.",

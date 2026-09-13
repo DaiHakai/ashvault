@@ -93,6 +93,52 @@ export function abilitiesFor(weaponId, backgroundId = null) {
  */
 const TITLES = load('titles.json');
 
+// The first encounter teaches the discipline the player actually picked. The
+// background still owns the personal prologue; this is the weapon's lesson.
+const WEAPON_TUTORIALS = Object.freeze({
+  longsword: { name: 'The Doorway', text: 'When steel finds you, ATTACK <enemy>. Keep your feet. RIPOSTE answers the first enemy that misses.' },
+  warhammer: { name: 'The Breach', text: 'ATTACK <enemy> until the line breaks. BULWARK trades your action for a wall of your own making.' },
+  spear: { name: 'The Reach', text: 'Keep the point between you and them. ATTACK <enemy>; when the room turns ugly, BULWARK and make them come to you.' },
+  longbow: { name: 'The Long Shot', text: 'MARK <enemy> before you loose. Your marked prey gives your attacks advantage; ATTACK <enemy> from the dark.' },
+  daggers: { name: 'The Close Work', text: 'FADE when you need the first cut to matter. Your next ATTACK from hiding strikes much harder.' },
+  staff: { name: 'The Ember Debt', text: 'CINDERBOLT <enemy> spends Embers for fire and a lingering burn. Your hands are not empty just because they look that way.' },
+  tome: { name: 'The Written Thing', text: 'CINDERBOLT <enemy> is the line you have learned to speak aloud. Save Embers for the moment every enemy stands too close.' },
+  lantern: { name: 'The Kept Flame', text: 'KINDLE when blood is running low. The lantern is a weapon, but its light is also a promise.' },
+  censer: { name: 'The Smoke Line', text: 'KINDLE when the room takes its due. Swing the censer close, then use its smoke to hold what should not come nearer.' },
+  gravebell: { name: 'The Answering Bell', text: 'A body is a beginning. RAISE <corpse> to make a Thrall; it will draw every enemy away from you.' },
+});
+
+export function weaponTutorialFor(weaponId) {
+  return WEAPON_TUTORIALS[weaponId] ?? { name: 'The First Lesson', text: 'Type HELP whenever you need the words for what you mean to do.' };
+}
+
+/**
+ * A mystical past can turn a physical melee discipline into a hybrid class.
+ * The pair may attack with whichever of its fighting stat or mystic stat is
+ * stronger. This makes a sword + Scholar a real spellblade mechanically, not
+ * merely a differently named swordsman.
+ */
+export function combatProfileFor(weaponId, backgroundId) {
+  const weapon = getWeapon(weaponId);
+  const background = getBackground(backgroundId);
+  const mystic = background.mystic;
+  const hybrid = Boolean(mystic && weapon.range === 'melee');
+  if (hybrid) {
+    return {
+      kind: `${mystic.school} melee`,
+      label: `${mystic.school[0].toUpperCase()}${mystic.school.slice(1)} melee`,
+      attackAbilities: [weapon.primary, mystic.ability],
+      description: `${weapon.primary.toUpperCase()} or ${mystic.ability.toUpperCase()} drives your attacks — whichever is stronger.`,
+    };
+  }
+  return {
+    kind: weapon.range === 'melee' ? 'martial melee' : 'ranged discipline',
+    label: weapon.range === 'melee' ? 'Martial melee' : 'Ranged discipline',
+    attackAbilities: [weapon.primary],
+    description: `${weapon.primary.toUpperCase()} drives your attacks.`,
+  };
+}
+
 /**
  * Some pasts refuse some weapons (§3.1) — the WoW dwarf-druid rule. Kept as a
  * short forbidden list rather than a sparse allow-list, so the combination
@@ -182,7 +228,7 @@ export function creationCatalogue() {
         Object.fromEntries(
           playableBackgroundIds().map((b) => [
             b,
-            { title: titleFor(w, b), gloss: titleGlossFor(w, b) },
+            { title: titleFor(w, b), gloss: titleGlossFor(w, b), combatProfile: combatProfileFor(w, b) },
           ])
         ),
       ])

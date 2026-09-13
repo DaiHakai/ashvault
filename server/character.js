@@ -7,7 +7,7 @@
 import { randomUUID } from 'node:crypto';
 import { roll, rollDamage } from './dice.js';
 import {
-  getWeapon, getBackground, getItem, abilitiesFor, titleFor, refusalFor, isBackgroundLocked,
+  getWeapon, getBackground, getItem, abilitiesFor, titleFor, refusalFor, isBackgroundLocked, combatProfileFor,
 } from './content.js';
 import {
   ABILITIES,
@@ -275,14 +275,18 @@ export function takePendingAdvantage(character) {
 
 export function weaponAttackBonus(character) {
   const weapon = weaponOf(character);
+  const profile = combatProfileFor(character.weaponId, character.backgroundId);
+  const attackMod = Math.max(...profile.attackAbilities.map((ability) => abilityMod(character.abilities[ability])));
   return proficiencyBonus(character.level)
-    + abilityMod(character.abilities[weapon.ability])
+    + attackMod
     + rarityBonus(weapon);
 }
 
 export function weaponDamageMod(character) {
   const weapon = weaponOf(character);
-  return abilityMod(character.abilities[weapon.ability]) + rarityBonus(weapon);
+  const profile = combatProfileFor(character.weaponId, character.backgroundId);
+  const attackMod = Math.max(...profile.attackAbilities.map((ability) => abilityMod(character.abilities[ability])));
+  return attackMod + rarityBonus(weapon);
 }
 
 // ---------------------------------------------------------------- mutation

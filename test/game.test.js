@@ -17,7 +17,7 @@ import {
   getRoom, getWeapon, WEAPONS, BACKGROUNDS, titleFor, titleGlossFor,
   isBackgroundLocked, playableBackgroundIds, authoredCombinationCount,
   creationCatalogue, startingRoomFor,
-  isAllowed, refusalFor, validCombinationCount, abilitiesFor, getEnemy,
+  isAllowed, refusalFor, validCombinationCount, abilitiesFor, getEnemy, weaponTutorialFor,
 } from '../server/content.js';
 
 const WEAPON_IDS = Object.keys(WEAPONS);
@@ -939,4 +939,25 @@ test('the Warden drops an Epic, and unlocks nothing', () => {
   assert.ok(inv.some((i) => i.rarity === 'epic'), `one Epic must drop — got ${names}`);
   assert.equal(s.character.hubUnlocked, before, 'the Crypt boss grants no hub access');
   assert.deepEqual(Object.keys(s.currentExits()), ['up'], 'the only way on is back');
+});
+
+test('a Scholar turns a melee weapon into an Intelligence-scaled hybrid and teaches it', () => {
+  const s = new GameSession();
+  s.statPool = [{ total: 10 }, { total: 11 }, { total: 12 }, { total: 18 }, { total: 9 }, { total: 8 }];
+  s.beginGame({
+    name: 'Spellblade Test', weaponId: 'longsword', backgroundId: 'scholar',
+    assignment: { str: 0, dex: 1, con: 2, int: 3, wis: 4, cha: 5 },
+  });
+
+  assert.equal(s.character.title, 'Spellblade');
+  assert.equal(weaponAttackBonus(s.character), 6, 'INT 19 should beat STR 12 for this hybrid');
+  assert.equal(weaponDamageMod(s.character), 4);
+  assert.equal(s.snapshot().character.combatProfile.label, 'Arcane melee');
+  assert.match(textOf({ entries: s.entries }), /THE DOORWAY/, 'every weapon begins with its own lesson');
+});
+
+test('every weapon has a distinct first lesson', () => {
+  const lessons = WEAPON_IDS.map((weaponId) => weaponTutorialFor(weaponId));
+  assert.ok(lessons.every((lesson) => lesson.name && lesson.text));
+  assert.equal(new Set(lessons.map((lesson) => lesson.name)).size, WEAPON_IDS.length);
 });

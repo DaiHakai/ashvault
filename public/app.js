@@ -302,11 +302,12 @@
 
     if (title) {
       $('model-name').textContent = title;
+      const profile = entry.combatProfile;
       $('model-tag').textContent = `${bg.name} · ${weapon.name}`;
       // The gloss is the payoff of hand-writing all 90 — it says who this
       // specific pairing is, which a generated name never could.
       $('model-blurb').textContent = entry.gloss;
-      $('model-hook').textContent = bg.hubHook ?? '';
+      $('model-hook').textContent = profile?.description ?? bg.hubHook ?? '';
       return;
     }
     if (weapon) {
@@ -660,7 +661,7 @@
       label: `${c.name}, ${c.weaponName}`,
     });
     $('sheet-name').textContent = c.name;
-    $('sheet-class').textContent = `Level ${c.level} ${c.title} · ${c.backgroundName} with a ${c.weaponName}`;
+    $('sheet-class').textContent = `Level ${c.level} ${c.title} · ${c.combatProfile?.label ?? c.backgroundName} · ${c.backgroundName} with a ${c.weaponName}`;
     $('sheet-badges').innerHTML =
       (c.hubUnlocked ? '<span class="badge">Hub-unlocked</span>' : '') +
       (c.status === 'dead' ? '<span class="badge dead">Dead</span>' : '');

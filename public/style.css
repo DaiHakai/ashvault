@@ -469,10 +469,11 @@ body {
 /* ============================================================== GAME */
 
 #game { display: grid; grid-template-columns: minmax(0, 1fr) 340px; height: 100dvh; overflow: hidden; }
-.terminal { display: flex; flex-direction: column; min-width: 0; height: 100%; }
+.terminal { display: flex; flex-direction: column; min-width: 0; height: 100%; overflow: hidden; }
 
 .log {
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
   padding: 1.4rem clamp(1rem, 3vw, 2.4rem) 1rem;
   scroll-behavior: smooth;
@@ -503,7 +504,7 @@ body {
 }
 
 .prompt {
-  display: flex; align-items: center; gap: 0.6rem;
+  display: flex; flex: 0 0 auto; align-items: center; gap: 0.6rem;
   border-top: 1px solid var(--rule);
   background: var(--bg-panel);
   padding: 0.7rem clamp(1rem, 3vw, 2.4rem);

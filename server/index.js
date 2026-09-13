@@ -52,6 +52,26 @@ function gamePayload(game, entries = game.takeRecent()) {
   return { sessionId: game.id, statPool: game.publicStatPool(), catalogue: creationCatalogue(), entries, state: game.snapshot() };
 }
 
+// A Pocket Save is deliberately a player-held backup, not a replacement for
+// the eventual database. Keeping the transcript short makes a code practical
+// to copy while preserving every piece of game state needed to resume a run.
+function portableSave(game) {
+  const saved = game.saveState();
+  saved.entries = saved.entries.slice(-40);
+  return saved;
+}
+
+function readPortableSave(value) {
+  if (!value || typeof value !== 'object') throw new Error('That Pocket Save is unreadable.');
+  const encoded = JSON.stringify(value);
+  if (encoded.length > 30_000) throw new Error('That Pocket Save is too large.');
+  if (!['creation', 'playing', 'dead', 'victory'].includes(value.state)) throw new Error('That Pocket Save has an invalid state.');
+  if (value.character && (typeof value.character.name !== 'string' || value.character.name.length > 24)) {
+    throw new Error('That Pocket Save has an invalid character.');
+  }
+  return GameSession.restore(value);
+}
+
 app.post('/api/auth/register', async (req, res) => {
   try {
     const created = await store.createAccount(req.body ?? {}); const { account, vaultKey } = created;
@@ -73,6 +93,19 @@ app.post('/api/session', async (req, res) => {
 app.get('/api/session', async (req, res) => {
   const account = await accountFor(req, res); if (!account) return;
   const game = await gameFor(account); res.json({ account, ...gamePayload(game, game.entries) });
+});
+app.get('/api/session/export', async (req, res) => {
+  const account = await accountFor(req, res); if (!account) return;
+  res.json({ version: 1, account: { displayName: account.displayName }, save: portableSave(await gameFor(account)) });
+});
+app.post('/api/session/import', async (req, res) => {
+  const account = await accountFor(req, res); if (!account) return;
+  try {
+    const game = readPortableSave(req.body?.save);
+    sessions.set(account.id, game);
+    await save(account, game);
+    res.json({ account, ...gamePayload(game, game.entries) });
+  } catch (error) { res.status(400).json({ error: error.message }); }
 });
 app.post('/api/character', async (req, res) => {
   const account = await accountFor(req, res); if (!account) return;

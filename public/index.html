@@ -28,6 +28,7 @@
           <p id="auth-error" class="error" role="alert"></p>
           <button id="auth-submit" type="button">Create account</button>
           <button id="auth-switch" type="button" class="link-btn">I have a Vault Key</button>
+          <button id="pocket-open-auth" type="button" class="link-btn">Restore a Pocket Save</button>
           <div id="key-reveal" class="key-reveal hidden" role="status">
             <div id="key-reveal-text"></div>
             <button id="key-continue" type="button">I saved it — enter Ashvault</button>
@@ -192,6 +193,24 @@
       </div>
     </section>
 
+  </div>
+
+  <!-- A player-held backup for the itch build. It restores a run after browser
+       data is cleared or a lightweight playtest server is restarted. -->
+  <div id="pocket-dialog" class="pocket-dialog hidden" role="dialog" aria-modal="true" aria-labelledby="pocket-title">
+    <div class="pocket-card">
+      <button id="pocket-close" class="pocket-close" type="button" aria-label="Close backup panel">×</button>
+      <h2 id="pocket-title">Pocket Save</h2>
+      <p class="note">This is your personal run backup. It works without a database, but it is honor-system data — do not share it as a party code.</p>
+      <button id="pocket-generate" type="button">Generate current save code</button>
+      <textarea id="pocket-output" class="pocket-code" readonly spellcheck="false" aria-label="Pocket Save code"></textarea>
+      <button id="pocket-copy" type="button" class="ghost-btn">Copy code</button>
+      <label class="auth-label">Restore a Pocket Save
+        <textarea id="pocket-input" class="pocket-code" spellcheck="false" autocapitalize="characters" placeholder="ASH1-…"></textarea>
+      </label>
+      <button id="pocket-restore" type="button">Restore this save</button>
+      <p id="pocket-message" class="note" role="status"></p>
+    </div>
   </div>
 
   <script src="audio.js"></script>

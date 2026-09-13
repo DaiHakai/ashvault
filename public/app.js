@@ -40,6 +40,87 @@
     return data;
   }
 
+  // --------------------------------------------------------- pocket saves
+  // A Pocket Save belongs to the player, rather than this server process.
+  // It is intentionally transparent, checksum-protected JSON: good for an
+  // itch.io backup, but never a source of truth for future ranked/social play.
+  const POCKET_STORAGE_KEY = 'ashvault-pocket-save-v1';
+  const POCKET_PREFIX = 'ASH1-';
+
+  function pocketChecksum(value) {
+    let hash = 2166136261;
+    for (let i = 0; i < value.length; i += 1) {
+      hash ^= value.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    return (hash >>> 0).toString(36).toUpperCase().padStart(7, '0');
+  }
+
+  function bytesToBase64Url(bytes) {
+    let binary = '';
+    for (const byte of bytes) binary += String.fromCharCode(byte);
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+  }
+
+  function base64UrlToBytes(value) {
+    const base64 = value.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - value.length % 4) % 4);
+    const binary = atob(base64);
+    return Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
+  }
+
+  async function packPocket(text) {
+    const source = new TextEncoder().encode(text);
+    if (!window.CompressionStream) return `J${bytesToBase64Url(source)}`;
+    const stream = new Blob([source]).stream().pipeThrough(new CompressionStream('gzip'));
+    const packed = new Uint8Array(await new Response(stream).arrayBuffer());
+    return `G${bytesToBase64Url(packed)}`;
+  }
+
+  async function unpackPocket(body) {
+    const format = body[0];
+    const bytes = base64UrlToBytes(body.slice(1));
+    if (format === 'J') return new TextDecoder().decode(bytes);
+    if (format !== 'G' || !window.DecompressionStream) throw new Error('This browser cannot read that Pocket Save.');
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    return new TextDecoder().decode(await new Response(stream).arrayBuffer());
+  }
+
+  async function encodePocket(payload) {
+    const body = await packPocket(JSON.stringify(payload));
+    return `${POCKET_PREFIX}${body}.${pocketChecksum(body)}`;
+  }
+
+  async function decodePocket(code) {
+    const cleaned = String(code ?? '').trim().replace(/\s+/g, '');
+    if (!cleaned.startsWith(POCKET_PREFIX)) throw new Error('That is not an Ashvault Pocket Save.');
+    const [body, checksum, extra] = cleaned.slice(POCKET_PREFIX.length).split('.');
+    if (!body || !checksum || extra || checksum !== pocketChecksum(body)) {
+      throw new Error('That Pocket Save does not match its checksum. Copy the whole code again.');
+    }
+    try {
+      const payload = JSON.parse(await unpackPocket(body));
+      if (payload?.version !== 1 || !payload.save) throw new Error('bad payload');
+      return payload;
+    } catch {
+      throw new Error('That Pocket Save could not be read.');
+    }
+  }
+
+  function rememberPocket(payload) {
+    try { localStorage.setItem(POCKET_STORAGE_KEY, JSON.stringify(payload)); } catch { /* browser storage is optional */ }
+  }
+
+  function savedPocket() {
+    try { return JSON.parse(localStorage.getItem(POCKET_STORAGE_KEY) ?? 'null'); } catch { return null; }
+  }
+
+  async function backupCurrentRun() {
+    if (!state.account) return null;
+    const payload = await api('/api/session/export', null, 'GET');
+    rememberPocket(payload);
+    return payload;
+  }
+
   // ------------------------------------------------------------ creation
 
   async function boot() {
@@ -101,6 +182,51 @@
     } catch (error) { $('auth-error').textContent = error.message; }
   });
   $('key-continue').addEventListener('click', () => loadRun().catch((error) => { $('auth-error').textContent = error.message; }));
+
+  function setPocketMessage(message, error = false) {
+    const el = $('pocket-message');
+    el.textContent = message;
+    el.classList.toggle('error', error);
+  }
+  async function openPocket() {
+    const saved = savedPocket();
+    $('pocket-dialog').classList.remove('hidden');
+    $('pocket-output').value = saved ? await encodePocket(saved) : '';
+    $('pocket-input').value = '';
+    setPocketMessage(saved ? 'A fresh backup is already stored in this browser.' : 'Generate a code after you have begun a run.');
+  }
+  function closePocket() { $('pocket-dialog').classList.add('hidden'); }
+  $('pocket-open-auth').addEventListener('click', () => openPocket().catch((error) => setPocketMessage(error.message, true)));
+  $('pocket-close').addEventListener('click', closePocket);
+  $('pocket-generate').addEventListener('click', async () => {
+    try {
+      const payload = await backupCurrentRun();
+      if (!payload) throw new Error('Create or restore an account before generating a save.');
+      $('pocket-output').value = await encodePocket(payload);
+      setPocketMessage('Pocket Save generated. Copy it somewhere safe.');
+    } catch (error) { setPocketMessage(error.message, true); }
+  });
+  $('pocket-copy').addEventListener('click', async () => {
+    const value = $('pocket-output').value;
+    if (!value) return setPocketMessage('Generate a save code first.', true);
+    try { await navigator.clipboard.writeText(value); setPocketMessage('Pocket Save copied.'); }
+    catch { $('pocket-output').focus(); $('pocket-output').select(); setPocketMessage('Code selected — copy it with your device controls.'); }
+  });
+  $('pocket-restore').addEventListener('click', async () => {
+    try {
+      const payload = await decodePocket($('pocket-input').value);
+      // When a free playtest server has forgotten an account, the Pocket Save
+      // creates a fresh identity and then restores the character beneath it.
+      if (!state.account) {
+        const created = await api('/api/auth/register', { displayName: payload.account?.displayName ?? 'Recovered Wanderer' });
+        state.account = created.account;
+      }
+      await api('/api/session/import', { save: payload.save });
+      rememberPocket(payload);
+      closePocket();
+      await loadRun();
+    } catch (error) { setPocketMessage(error.message, true); }
+  });
 
   function showScreen(name) {
     for (const id of ['auth', 'creation', 'game', 'hub']) {
@@ -313,6 +439,7 @@
         assignment: state.assignment,
       });
       enterGame(data);
+      backupCurrentRun().catch(() => {});
     } catch (err) {
       $('creation-error').textContent = err.message;
     }
@@ -326,6 +453,7 @@
     state.snapshot = data.state;
     syncAmbience();
     renderSheet();
+    backupCurrentRun().catch(() => {});
     $('prompt').focus();
   }
 
@@ -470,6 +598,7 @@
 
       renderSheet();
       if (data.state.state === 'victory') renderHub();
+      backupCurrentRun().catch(() => {});
     } catch (err) {
       appendEntries([{ kind: 'error', text: err.message }]);
     } finally {
@@ -522,8 +651,10 @@
 
     $('sheet-bars').innerHTML = vitalBars(c);
     $('sheet-account').innerHTML = state.account?.friendCode
-      ? `<span>Friend code</span><code>${escape(state.account.friendCode)}</code><small>Share this to form a party.</small>`
+      ? `<span>Friend code</span><code>${escape(state.account.friendCode)}</code><small>Share this to form a party.</small><button id="pocket-open-sheet" type="button" class="ghost-btn">Pocket Save</button>`
       : '';
+
+    $('pocket-open-sheet')?.addEventListener('click', () => openPocket().catch((error) => setPocketMessage(error.message, true)));
 
     const enc = s.encounter;
     $('sheet-room').innerHTML = s.room

@@ -62,6 +62,12 @@ body {
 .key-reveal code { display: block; padding: 0.55rem; background: #120f0c; color: var(--bone); font-size: 0.95rem; letter-spacing: 0.08em; user-select: all; }
 .key-reveal b { color: var(--moss); }
 
+.pocket-dialog { position: fixed; z-index: 50; inset: 0; display: grid; place-items: center; padding: 1rem; background: rgba(7, 6, 5, 0.82); }
+.pocket-card { position: relative; width: min(34rem, 100%); display: grid; gap: 0.7rem; padding: 1.25rem; border: 1px solid var(--amber-soft); background: #17130f; box-shadow: 0 1.25rem 4rem #000; }
+.pocket-card h2 { margin: 0; color: var(--amber); }
+.pocket-close { position: absolute; top: 0.35rem; right: 0.55rem; border: 0; background: transparent; color: var(--ink-dim); font-size: 1.5rem; }
+.pocket-code { min-height: 5.5rem; width: 100%; resize: vertical; padding: 0.65rem; border: 1px solid var(--rule); background: #0d0b09; color: var(--bone); font: 0.75rem/1.35 var(--mono); overflow-wrap: anywhere; }
+
 .sr-only {
   position: absolute; width: 1px; height: 1px;
   padding: 0; margin: -1px; overflow: hidden;

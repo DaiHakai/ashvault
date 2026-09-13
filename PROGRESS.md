@@ -193,3 +193,22 @@ The user supplied `DarkGlorydesign.md` (in Downloads) as an overhaul. It is a **
 - Weapons deliberately share abilities. If two weapons feel too alike, differentiate via damage die, armour, and scaling ability before writing a new ability.
 
 **Open design questions** — GAME_DESIGN §11 (group loot, party wipe, tradeable marks, dice monetisation, guilds), each with the phase it must be answered by.
+
+## 2026-09-13 — natural-language command pass
+
+- Added a safe, local intent layer: `INVESTIGATE`, `ROLL CHECK`, `ROLL A PERCEPTION CHECK`, `MAKE AN INVESTIGATION CHECK`, and common search requests now resolve to `SEARCH`.
+- This is deliberately not an external AI API. It is immediate, private, free to run, and only maps requests to the existing safe search interaction; it does not invent combat targets or outcomes.
+- Updated the in-game command hint and `HELP` text. `npm test`: **101 passing**.
+- Published as Git commit `d868f89` and manually deployed successfully to `https://ashvault.onrender.com`.
+
+## 2026-09-13 — terminal input visibility fix
+
+- Constrained the narrative log to its own scroll area (`min-height: 0`) and prevented the terminal from overflowing. The command bar now stays pinned when the story reaches the bottom of the screen, including portrait layouts.
+- `npm test`: **101 passing**. Published as `b4568eb` and manually deployed successfully.
+
+## 2026-09-13 — Pocket Save safety net
+
+- Added an automatic browser-side backup after character creation and every resolved command. It contains the full resumable run, including room state, inventory, character, encounter and recent log.
+- Added **Pocket Save** in the character sheet plus **Restore a Pocket Save** on the account screen. Codes are gzip-compressed, checksum-protected, copyable on mobile, and can recreate a fresh lightweight-server account before importing the saved run.
+- This deliberately remains an honor-system backup. It protects itch.io playtests from browser clearing and Render memory restarts; future party, rankings and economy systems must use persistent server storage instead.
+- Browser-tested end to end: created Pocket Runner, generated a code, restored it, and returned to the same character and room. `npm test`: **102 passing**.

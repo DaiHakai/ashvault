@@ -297,6 +297,7 @@ body {
 .chip-forbidden {
   opacity: 0.35;
   border-style: dashed;
+  cursor: not-allowed;
 }
 
 .chip-forbidden .chip-name { text-decoration: line-through; }

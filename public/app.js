@@ -267,6 +267,7 @@
 
     renderAssign();
     renderModel();
+    markForbiddenChoices();
     updateBeginButton();
   }
 
@@ -387,14 +388,28 @@
     return bg?.forbids?.[state.weaponId] ?? null;
   }
 
-  /** Grey out the weapons the chosen past will not carry, and say so on hover. */
-  function markForbiddenWeapons() {
-    const bg = state.catalogue.backgrounds.find((b) => b.id === state.backgroundId);
+  function markForbiddenChip(chip, reason) {
+    const forbidden = Boolean(reason);
+    chip.classList.toggle('chip-forbidden', forbidden);
+    chip.disabled = forbidden;
+    chip.setAttribute('aria-disabled', String(forbidden));
+    if (reason) chip.title = reason;
+    else chip.removeAttribute('title');
+  }
+
+  /**
+   * A prohibition belongs to the pair, not to one side of the picker. Mirror
+   * the same rule in both directions so players never choose a half only to
+   * be told afterwards that it cannot become a character.
+   */
+  function markForbiddenChoices() {
+    const chosenBackground = state.catalogue.backgrounds.find((b) => b.id === state.backgroundId);
     for (const chip of document.querySelectorAll('.chip[data-kind="weapon"]')) {
-      const reason = bg?.forbids?.[chip.dataset.id] ?? null;
-      chip.classList.toggle('chip-forbidden', Boolean(reason));
-      if (reason) chip.title = reason;
-      else chip.removeAttribute('title');
+      markForbiddenChip(chip, chosenBackground?.forbids?.[chip.dataset.id] ?? null);
+    }
+    for (const chip of document.querySelectorAll('.chip[data-kind="background"]')) {
+      const background = state.catalogue.backgrounds.find((b) => b.id === chip.dataset.id);
+      markForbiddenChip(chip, background?.forbids?.[state.weaponId] ?? null);
     }
   }
 
@@ -415,6 +430,7 @@
   document.addEventListener('click', (e) => {
     const chip = e.target.closest('.chip');
     if (!chip) return;
+    if (chip.disabled || chip.getAttribute('aria-disabled') === 'true') return;
     const { kind, id } = chip.dataset;
     if (kind === 'weapon') state.weaponId = id;
     if (kind === 'background') state.backgroundId = id;
@@ -423,7 +439,7 @@
     });
     renderModel();
     renderAssignResults();
-    markForbiddenWeapons();
+    markForbiddenChoices();
     updateBeginButton();
   });
 

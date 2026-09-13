@@ -212,3 +212,9 @@ The user supplied `DarkGlorydesign.md` (in Downloads) as an overhaul. It is a **
 - Added **Pocket Save** in the character sheet plus **Restore a Pocket Save** on the account screen. Codes are gzip-compressed, checksum-protected, copyable on mobile, and can recreate a fresh lightweight-server account before importing the saved run.
 - This deliberately remains an honor-system backup. It protects itch.io playtests from browser clearing and Render memory restarts; future party, rankings and economy systems must use persistent server storage instead.
 - Browser-tested end to end: created Pocket Runner, generated a code, restored it, and returned to the same character and room. `npm test`: **102 passing**.
+
+## 2026-09-13 — bidirectional pairing lockout
+
+- Fixed the creation-picker bug where a forbidden combination was only dimmed after choosing a background, and could still be clicked.
+- Prohibitions now lock both halves of a pair: choosing the **Spear** disables **Gutter Rat**; choosing **Gutter Rat** disables **Spear**. Every other authored refusal behaves the same way, with its in-fiction reason retained as the control description.
+- The server has always rejected those pairs; this makes the UI match the game rules. `npm test`: **102 passing**.

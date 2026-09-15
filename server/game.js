@@ -668,7 +668,9 @@ export class GameSession {
     } else {
       target = [...living].sort((a, b) => a.hp - b.hp)[0];
     }
-    this.finish(this.encounter.playerAttack(target));
+    const result = this.encounter.playerAttack(target);
+    if (result?.ok !== false) this.completeWeaponLesson({ action: 'attack' });
+    this.finish(result);
   }
 
   doAbility(name, targetName) {
@@ -695,8 +697,23 @@ export class GameSession {
 
     const result = this.encounter.playerAbility(ability, enemy);
     if (result.ok === false) return this.push('error', result.message);
+    this.completeWeaponLesson({ ability: ability.id });
     if (result.endsTurn && !this.encounter.over) this.encounter.endPlayerTurn();
     this.afterEncounterStep();
+  }
+
+  /** Complete the opening weapon lesson only after its real combat action lands. */
+  completeWeaponLesson(action) {
+    const progress = this.character?.tutorial;
+    if (!progress || progress.completed) return false;
+    const lesson = weaponTutorialFor(this.character.weaponId);
+    const objective = lesson.objective ?? {};
+    const matches = (objective.action && objective.action === action.action)
+      || (objective.ability && objective.ability === action.ability);
+    if (!matches) return false;
+    progress.completed = true;
+    this.push('good', `${lesson.name.toUpperCase()} — ${lesson.complete ?? 'Lesson learned.'}`);
+    return true;
   }
 
   doClimb() {

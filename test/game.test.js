@@ -11,6 +11,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 import { GameSession } from '../server/game.js';
+import { Encounter } from '../server/combat.js';
 import { weaponAttackBonus, weaponDamageMod, addItem, equipItem, armourClass } from '../server/character.js';
 import { rarityBonus } from '../server/rules.js';
 import {
@@ -958,6 +959,36 @@ test('a Scholar turns a melee weapon into an Intelligence-scaled hybrid and teac
 
 test('every weapon has a distinct first lesson', () => {
   const lessons = WEAPON_IDS.map((weaponId) => weaponTutorialFor(weaponId));
-  assert.ok(lessons.every((lesson) => lesson.name && lesson.text));
+  assert.ok(lessons.every((lesson) => lesson.name && lesson.text && lesson.objective && lesson.complete));
   assert.equal(new Set(lessons.map((lesson) => lesson.name)).size, WEAPON_IDS.length);
+});
+
+test('a weapon lesson completes only after its matching combat action', () => {
+  const s = new GameSession();
+  s.statPool = [{ total: 10 }, { total: 11 }, { total: 12 }, { total: 18 }, { total: 9 }, { total: 8 }];
+  s.beginGame({
+    name: 'Lesson Test', weaponId: 'longsword', backgroundId: 'scholar',
+    assignment: { str: 0, dex: 1, con: 2, int: 3, wis: 4, cha: 5 },
+  });
+  assert.equal(s.completeWeaponLesson({ ability: 'bulwark' }), false);
+  assert.equal(s.character.tutorial.completed, false);
+  assert.equal(s.completeWeaponLesson({ action: 'attack' }), true);
+  assert.equal(s.character.tutorial.completed, true);
+  assert.match(textOf({ entries: s.entries }), /Steel answers/);
+});
+
+test('Bulwark spends an action and grants its promised +4 AC', () => {
+  const s = new GameSession();
+  s.statPool = [{ total: 10 }, { total: 11 }, { total: 12 }, { total: 18 }, { total: 9 }, { total: 8 }];
+  s.beginGame({
+    name: 'Bulwark Test', weaponId: 'spear', backgroundId: 'caravan_guard',
+    assignment: { str: 3, dex: 1, con: 2, int: 0, wis: 4, cha: 5 },
+  });
+  const encounter = new Encounter({ room: getRoom('pro_caravan_guard_2'), character: s.character, log: () => {} });
+  const before = encounter.playerAc();
+  const bulwark = abilitiesFor('spear', 'caravan_guard').find((ability) => ability.id === 'bulwark');
+  const result = encounter.playerAbility(bulwark);
+  assert.equal(result.ok, true);
+  assert.equal(result.endsTurn, true);
+  assert.equal(encounter.playerAc(), before + 4);
 });

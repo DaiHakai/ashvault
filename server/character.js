@@ -84,6 +84,9 @@ export function createCharacter({ name, weaponId, backgroundId, assignment, stat
     hubUnlocked: false,
     usedManualDice: false,
     lastBreathUsed: false,
+    // The weapon lesson is saved with the character. It is a brief first-run
+    // tutorial, not a permanent requirement or a separate class system.
+    tutorial: { completed: false },
 
     // Per-rest ability uses, keyed by ability id. Cleared by REST.
     restUses: {},

@@ -88,6 +88,7 @@ export class Encounter {
       actionUsed: false,
       bonusUsed: false,
       defendingUntilTurn: null,
+      bulwarkUntilTurn: null,
       emberwallUntilTurn: null,
       hidden: false,
       markedUid: null,
@@ -275,6 +276,9 @@ export class Encounter {
 
     if (p.defendingUntilTurn !== null && p.defendingUntilTurn < this.playerTurnCount) {
       p.defendingUntilTurn = null;
+    }
+    if (p.bulwarkUntilTurn !== null && p.bulwarkUntilTurn < this.playerTurnCount) {
+      p.bulwarkUntilTurn = null;
     }
     if (p.emberwallUntilTurn !== null && p.emberwallUntilTurn < this.playerTurnCount) {
       p.emberwallUntilTurn = null;
@@ -531,6 +535,13 @@ export class Encounter {
         p.markedUid = enemy.uid;
         this.log('good', `You mark ${enemy.label}. Your attacks against it have advantage.`);
         return { ok: true, endsTurn: false };
+      }
+
+      case 'bulwark': {
+        consume();
+        p.bulwarkUntilTurn = this.playerTurnCount;
+        this.log('good', 'Bulwark — you set the weapon and become difficult to move. +4 AC until your next turn.');
+        return { ok: true, endsTurn: true };
       }
 
       case 'second_wind': {
@@ -1083,6 +1094,7 @@ export class Encounter {
   playerAc() {
     let ac = armourClass(this.character);
     if (this.player.defendingUntilTurn !== null) ac += 2;
+    if (this.player.bulwarkUntilTurn !== null) ac += 4;
     if (this.player.emberwallUntilTurn !== null) ac += 2;
     return ac;
   }

@@ -96,16 +96,16 @@ const TITLES = load('titles.json');
 // The first encounter teaches the discipline the player actually picked. The
 // background still owns the personal prologue; this is the weapon's lesson.
 const WEAPON_TUTORIALS = Object.freeze({
-  longsword: { name: 'The Doorway', text: 'When steel finds you, ATTACK <enemy>. Keep your feet. RIPOSTE answers the first enemy that misses.' },
-  warhammer: { name: 'The Breach', text: 'ATTACK <enemy> until the line breaks. BULWARK trades your action for a wall of your own making.' },
-  spear: { name: 'The Reach', text: 'Keep the point between you and them. ATTACK <enemy>; when the room turns ugly, BULWARK and make them come to you.' },
-  longbow: { name: 'The Long Shot', text: 'MARK <enemy> before you loose. Your marked prey gives your attacks advantage; ATTACK <enemy> from the dark.' },
-  daggers: { name: 'The Close Work', text: 'FADE when you need the first cut to matter. Your next ATTACK from hiding strikes much harder.' },
-  staff: { name: 'The Ember Debt', text: 'CINDERBOLT <enemy> spends Embers for fire and a lingering burn. Your hands are not empty just because they look that way.' },
-  tome: { name: 'The Written Thing', text: 'CINDERBOLT <enemy> is the line you have learned to speak aloud. Save Embers for the moment every enemy stands too close.' },
-  lantern: { name: 'The Kept Flame', text: 'KINDLE when blood is running low. The lantern is a weapon, but its light is also a promise.' },
-  censer: { name: 'The Smoke Line', text: 'KINDLE when the room takes its due. Swing the censer close, then use its smoke to hold what should not come nearer.' },
-  gravebell: { name: 'The Answering Bell', text: 'A body is a beginning. RAISE <corpse> to make a Thrall; it will draw every enemy away from you.' },
+  longsword: { name: 'The Doorway', text: 'When steel finds you, ATTACK <enemy>. Keep your feet. RIPOSTE answers the first enemy that misses.', objective: { action: 'attack' }, complete: 'Steel answers. You know how this begins.' },
+  warhammer: { name: 'The Breach', text: 'ATTACK <enemy> until the line breaks. ABILITY BULWARK trades your action for a wall of your own making.', objective: { ability: 'bulwark' }, complete: 'You plant your feet. The world has to go around you.' },
+  spear: { name: 'The Reach', text: 'Keep the point between you and them. ATTACK <enemy>; when the room turns ugly, ABILITY BULWARK and make them come to you.', objective: { ability: 'bulwark' }, complete: 'The point holds the distance. That is enough.' },
+  longbow: { name: 'The Long Shot', text: 'ABILITY MARK ON <enemy> before you loose. Your marked prey gives your attacks advantage; ATTACK <enemy> from the dark.', objective: { ability: 'mark' }, complete: 'The target resolves. The shot is already half made.' },
+  daggers: { name: 'The Close Work', text: 'ABILITY FADE when you need the first cut to matter. Your next ATTACK from hiding strikes much harder.', objective: { ability: 'fade' }, complete: 'For one breath, nobody can say where you are.' },
+  staff: { name: 'The Ember Debt', text: 'ABILITY CINDERBOLT ON <enemy> spends Embers for fire and a lingering burn. Your hands are not empty just because they look that way.', objective: { ability: 'cinderbolt' }, complete: 'The fire knows your name. That is not entirely good news.' },
+  tome: { name: 'The Written Thing', text: 'ABILITY CINDERBOLT ON <enemy> is the line you have learned to speak aloud. Save Embers for the moment every enemy stands too close.', objective: { ability: 'cinderbolt' }, complete: 'The words leave the page and do not come back.' },
+  lantern: { name: 'The Kept Flame', text: 'ABILITY KINDLE when blood is running low. The lantern is a weapon, but its light is also a promise.', objective: { ability: 'kindle' }, complete: 'The flame takes, and gives. You feel the cost of both.' },
+  censer: { name: 'The Smoke Line', text: 'ABILITY KINDLE when the room takes its due. Swing the censer close, then use its smoke to hold what should not come nearer.', objective: { ability: 'kindle' }, complete: 'The smoke obeys the shape of your breath.' },
+  gravebell: { name: 'The Answering Bell', text: 'A body is a beginning. After an enemy falls, ABILITY RAISE THRALL to make it fight for you.', objective: { ability: 'raise_thrall' }, complete: 'The bell answers. Something answers with it.' },
 });
 
 export function weaponTutorialFor(weaponId) {

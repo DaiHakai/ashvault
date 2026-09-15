@@ -225,3 +225,9 @@ The user supplied `DarkGlorydesign.md` (in Downloads) as an overhaul. It is a **
 - Added the first true hybrid rule: a **Scholar** paired with a melee weapon becomes an Intelligence-capable arcane melee discipline. The combat engine uses the stronger of the weapon's normal stat and INT for attack and damage — a Longsword Scholar is now genuinely a **Spellblade**, not just a renamed fighter.
 - Rewrote the other available Scholar melee titles to match the rule: **Runelancer**, **Hexknife**, **Lumen Knight**, and **Runethurifer**. The data model (`background.mystic`) makes later magical backgrounds straightforward to add without rewriting combat.
 - The character creator previews the actual attack-stat rule, and the character sheet carries the resulting discipline label.
+
+## 2026-09-15 — playable weapon lessons
+
+- Weapon lessons now have a real completion state: each asks for a specific combat action and completes only after that move succeeds. Progress is saved with the character and is never required to continue.
+- Fixed **Bulwark** for Warhammer and Spear. It now spends the action and grants its promised +4 AC until the next player turn; previously it was advertised but had no combat implementation.
+- Browser-verified the Longbow flow: the lesson displays the exact command (`ABILITY MARK ON <enemy>`), marking the target resolves successfully, and the completion line appears. `npm test`: **106 passing**.
